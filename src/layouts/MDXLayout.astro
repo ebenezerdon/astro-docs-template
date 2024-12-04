@@ -19,6 +19,7 @@ const { Content } = await entry.render()
       )}
       <span class="text-[#2D2D31] dark:text-white">{entry.data.title}</span>
     </div>
+    <h1 class="mt-0 mb-6">{entry.data.title}</h1>
     <Content components={MDXComponents} />
   </div>
 </DocsLayout>
