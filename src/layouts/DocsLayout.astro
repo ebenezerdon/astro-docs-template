@@ -47,19 +47,19 @@ const { title, description } = Astro.props
     <Header client:load />
 
     <div class="flex pt-14">
-      <!-- Sidebar -->
+      <!-- Left Sidebar -->
       <aside class="fixed top-14 left-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-r border-gray-200 dark:border-gray-800">
         <Sidebar client:load />
       </aside>
 
       <!-- Main content -->
-      <main class="flex-1 ml-64 p-8 pt-12">
-        <div class="max-w-4xl mx-auto">
+      <div class="flex-1 mx-64">
+        <main class="max-w-4xl mx-auto px-8 py-12">
           <slot />
-        </div>
-      </main>
+        </main>
+      </div>
 
-      <!-- Table of contents -->
+      <!-- Right Sidebar -->
       <aside class="fixed top-14 right-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-l border-gray-200 dark:border-gray-800">
         <TableOfContents client:load />
       </aside>
