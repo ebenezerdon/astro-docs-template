@@ -52,7 +52,8 @@
     currentPath = window.location.pathname
   }
 
-  function isCurrentPage(path: string): boolean {
+  function isCurrentPage(path: string | undefined): boolean {
+    if (!path) return false
     return currentPath === path || currentPath === path + '/'
   }
 </script>
@@ -67,18 +68,20 @@
         </div>
         <div class="space-y-0.5">
           {#each item.items as subItem}
-            <a
-              href={subItem.link}
-              class="block py-2 px-4 text-[15px] text-[#56565C] hover:text-[#2D2D31] no-underline transition-colors"
-              class:active={isCurrentPage(subItem.link)}
-              aria-current={isCurrentPage(subItem.link) ? 'page' : undefined}
-            >
-              {subItem.label}
-            </a>
+            {#if subItem.link}
+              <a
+                href={subItem.link}
+                class="block py-2 px-4 text-[15px] text-[#56565C] hover:text-[#2D2D31] no-underline transition-colors"
+                class:active={isCurrentPage(subItem.link)}
+                aria-current={isCurrentPage(subItem.link) ? 'page' : undefined}
+              >
+                {subItem.label}
+              </a>
+            {/if}
           {/each}
         </div>
       </div>
-    {:else}
+    {:else if item.link}
       <!-- Single item -->
       <a
         href={item.link}
