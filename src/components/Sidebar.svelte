@@ -58,41 +58,49 @@
   }
 </script>
 
-<nav class="h-full py-4">
-  {#each navigation as item}
-    {#if item.items}
-      <!-- Section with sub-items -->
-      <div class="mb-6">
-        <div class="px-4 py-2 text-xs font-medium text-[#2D2D31] uppercase tracking-wider">
-          {item.label}
+<nav class="h-full py-6 px-4">
+  <div class="space-y-6">
+    <!-- Top level items -->
+    <div class="space-y-1">
+      {#each navigation.slice(0, 3) as item}
+        {#if item.link}
+          <a
+            href={item.link}
+            class="block py-2 px-4 text-[15px] leading-[19.6px] tracking-[-0.0045em] font-normal text-[#666687] hover:text-[#2D2D31] no-underline transition-colors"
+            class:active={isCurrentPage(item.link)}
+            aria-current={isCurrentPage(item.link) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        {/if}
+      {/each}
+    </div>
+
+    <!-- Groups -->
+    {#each navigation.slice(3) as item}
+      {#if item.items}
+        <div class="pt-6 border-t border-gray-200 dark:border-gray-800">
+          <div class="px-4 mb-3 text-[13px] leading-[15.6px] tracking-[-0.01em] font-medium text-[#2D2D31] dark:text-white uppercase">
+            {item.label}
+          </div>
+          <div class="space-y-1">
+            {#each item.items as subItem}
+              {#if subItem.link}
+                <a
+                  href={subItem.link}
+                  class="block py-2 px-4 text-[15px] leading-[19.6px] tracking-[-0.0045em] font-normal text-[#666687] hover:text-[#2D2D31] no-underline transition-colors"
+                  class:active={isCurrentPage(subItem.link)}
+                  aria-current={isCurrentPage(subItem.link) ? 'page' : undefined}
+                >
+                  {subItem.label}
+                </a>
+              {/if}
+            {/each}
+          </div>
         </div>
-        <div class="space-y-0.5">
-          {#each item.items as subItem}
-            {#if subItem.link}
-              <a
-                href={subItem.link}
-                class="block py-2 px-4 text-[15px] text-[#56565C] hover:text-[#2D2D31] no-underline transition-colors"
-                class:active={isCurrentPage(subItem.link)}
-                aria-current={isCurrentPage(subItem.link) ? 'page' : undefined}
-              >
-                {subItem.label}
-              </a>
-            {/if}
-          {/each}
-        </div>
-      </div>
-    {:else if item.link}
-      <!-- Single item -->
-      <a
-        href={item.link}
-        class="block py-2 px-4 text-[15px] text-[#56565C] hover:text-[#2D2D31] no-underline transition-colors"
-        class:active={isCurrentPage(item.link)}
-        aria-current={isCurrentPage(item.link) ? 'page' : undefined}
-      >
-        {item.label}
-      </a>
-    {/if}
-  {/each}
+      {/if}
+    {/each}
+  </div>
 </nav>
 
 <style lang="postcss">
@@ -106,9 +114,5 @@
 
   :global(.dark) a {
     @apply text-gray-400 hover:text-white;
-  }
-
-  :global(.dark) :global(.text-\\[\\#2D2D31\\]) {
-    @apply text-gray-500;
   }
 </style>
