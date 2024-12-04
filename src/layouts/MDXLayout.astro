@@ -1,7 +1,6 @@
 ---
 import DocsLayout from './DocsLayout.astro'
 import type { CollectionEntry } from 'astro:content'
-import Callout from '@components/MDXComponents.svelte'
 import * as MDXComponents from '@components/mdx'
 
 interface Props {
@@ -10,9 +9,6 @@ interface Props {
 
 const { entry } = Astro.props
 const { Content } = await entry.render()
-
-// Make components available to MDX files
-const components = { Callout, ...MDXComponents }
 ---
 
 <DocsLayout title={entry.data.title} description={entry.data.description}>
@@ -23,6 +19,6 @@ const components = { Callout, ...MDXComponents }
       )}
       {entry.data.title}
     </h1>
-    <Content components={components} />
+    <Content components={MDXComponents} />
   </div>
 </DocsLayout>
