@@ -1,0 +1,18 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content'
+import MDXLayout from '../layouts/MDXLayout.astro'
+
+export async function getStaticPaths() {
+  const docs = await getCollection('docs')
+  return docs.map((entry: CollectionEntry<'docs'>) => ({
+    params: {
+      slug: entry.slug === 'index' ? undefined : entry.slug
+    },
+    props: { entry },
+  }))
+}
+
+const { entry } = Astro.props
+---
+
+<MDXLayout entry={entry} />

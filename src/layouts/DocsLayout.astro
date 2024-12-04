@@ -1,0 +1,68 @@
+---
+import Header from '../components/Header.svelte'
+import Sidebar from '../components/Sidebar.svelte'
+import TableOfContents from '../components/TableOfContents.svelte'
+import '../styles/custom.css'
+
+interface Props {
+  title: string
+  description: string
+}
+
+const { title, description } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Theme initialization script - must run before any content renders -->
+    <script is:inline>
+      const setTheme = () => {
+        const theme = localStorage.getItem('theme') ?? 'system'
+        const isDark = theme === 'dark' ||
+          (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+
+        document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
+        return theme
+      }
+
+      // Set initial theme
+      setTheme()
+
+      // Handle system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (localStorage.getItem('theme') !== 'system') return
+        setTheme()
+      })
+    </script>
+  </head>
+  <body class="min-h-screen bg-white dark:bg-gray-900">
+    <Header client:load />
+
+    <div class="flex pt-14">
+      <!-- Sidebar -->
+      <aside class="fixed top-14 left-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-r border-gray-200 dark:border-gray-800">
+        <Sidebar client:load />
+      </aside>
+
+      <!-- Main content -->
+      <main class="flex-1 ml-64 p-8 pt-12">
+        <div class="max-w-4xl mx-auto">
+          <slot />
+        </div>
+      </main>
+
+      <!-- Table of contents -->
+      <aside class="fixed top-14 right-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-l border-gray-200 dark:border-gray-800">
+        <TableOfContents client:load />
+      </aside>
+    </div>
+  </body>
+</html>

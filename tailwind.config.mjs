@@ -18,6 +18,34 @@ export default {
           900: '#0c4a6e',
         },
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            'code::before': {
+              content: '""',
+            },
+            'code::after': {
+              content: '""',
+            },
+            code: {
+              backgroundColor: theme('colors.gray.100'),
+              borderRadius: theme('borderRadius.md'),
+              paddingLeft: theme('spacing.1'),
+              paddingRight: theme('spacing.1'),
+              paddingTop: theme('spacing.0.5'),
+              paddingBottom: theme('spacing.0.5'),
+              fontSize: '0.875em',
+            },
+          },
+        },
+        invert: {
+          css: {
+            code: {
+              backgroundColor: theme('colors.gray.800'),
+            },
+          },
+        },
+      }),
     },
   },
   plugins: [require('@tailwindcss/typography')],
