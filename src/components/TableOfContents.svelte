@@ -51,7 +51,7 @@
 </script>
 
 <nav class="p-4">
-  <h2 class="text-sm font-medium mb-4 text-[#2D2D31] dark:text-gray-400">On this page</h2>
+  <h2 class="text-sm font-medium mb-4 text-[#2D2D31] dark:text-gray-400">ON THIS PAGE</h2>
   <ul class="space-y-2">
     {#each tocItems as item}
       <li style="padding-left: {(item.level - 2) * 16}px">
