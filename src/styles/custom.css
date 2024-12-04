@@ -10,3 +10,38 @@
 .code-preview {
   @apply mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg overflow-x-auto;
 }
+
+/* Sidebar styles */
+:root {
+  --sl-sidebar-width: 16rem;
+}
+
+/* Override Starlight's default sidebar styles */
+.sl-sidebar-layout {
+  --sl-content-width: 70rem;
+  --sl-sidebar-width: 16rem;
+}
+
+.sl-sidebar {
+  @apply border-r border-gray-200 dark:border-gray-800;
+}
+
+/* Remove default padding from sidebar */
+aside.sl-sidebar > div:first-child {
+  @apply p-0;
+}
+
+/* Site header */
+.site-title {
+  @apply flex items-center gap-2 px-4 py-3 text-lg font-semibold border-b border-gray-200 dark:border-gray-800;
+}
+
+/* Make content area full width */
+.content-panel {
+  @apply max-w-none;
+}
+
+/* Adjust main content padding */
+main {
+  @apply px-8 py-6;
+}

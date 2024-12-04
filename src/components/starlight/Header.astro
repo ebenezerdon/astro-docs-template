@@ -1,0 +1,51 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+
+const { logo } = Astro.props;
+---
+
+<div class="header">
+  <a href="/" class="site-title">
+    {
+      logo?.src && (
+        <img
+          class="logo"
+          src={logo.src}
+          alt={logo.alt ?? 'Site logo'}
+          width="32"
+          height="32"
+        />
+      )
+    }
+    <span class="title">
+      <span class="company-name">Acme Inc.</span>
+      <span class="documentation">Documentation</span>
+    </span>
+  </a>
+</div>
+
+<style>
+  .header {
+    @apply h-14 border-b border-gray-200 flex items-center px-4;
+  }
+
+  .site-title {
+    @apply flex items-center gap-2 text-lg no-underline;
+  }
+
+  .logo {
+    @apply w-8 h-8;
+  }
+
+  .title {
+    @apply flex items-center gap-2;
+  }
+
+  .company-name {
+    @apply text-[#4945FF] font-medium;
+  }
+
+  .documentation {
+    @apply text-gray-500 font-normal;
+  }
+</style>

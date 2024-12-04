@@ -7,26 +7,59 @@ import tailwind from '@astrojs/tailwind'
 export default defineConfig({
   integrations: [
     starlight({
-      title: 'Design System',
+      title: 'Acme Inc.',
+      logo: {
+        src: './src/assets/logo.svg',
+      },
+      components: {
+        Header: './src/components/starlight/Header.astro',
+        Sidebar: './src/components/starlight/Sidebar.astro',
+      },
       social: {
         github: 'https://github.com/yourusername/your-repo',
       },
       sidebar: [
         {
-          label: 'Getting Started',
-          items: [{ label: 'Introduction', slug: 'introduction' }],
+          label: 'Home',
+          link: '/',
         },
         {
-          label: 'Foundations',
+          label: 'Getting Started',
+          link: '/getting-started',
+        },
+        {
+          label: 'Design Tokens',
+          link: '/design-tokens',
+        },
+        {
+          label: 'FOUNDATIONS',
           items: [
-            { label: 'Colors', slug: 'foundations/colors' },
-            { label: 'Typography', slug: 'foundations/typography' },
-            { label: 'Spacing', slug: 'foundations/spacing' },
+            { label: 'Colors', link: '/foundations/colors' },
+            { label: 'Typography', link: '/foundations/typography' },
+            { label: 'Border Radius', link: '/foundations/border-radius' },
+            { label: 'Elevation', link: '/foundations/elevation' },
+            { label: 'Spacing', link: '/foundations/spacing' },
+            { label: 'Icons', link: '/foundations/icons' },
+            { label: 'Grids', link: '/foundations/grids' },
           ],
         },
         {
-          label: 'Components',
-          items: [{ label: 'Button', slug: 'components/button' }],
+          label: 'COMPONENTS',
+          items: [
+            { label: 'Accordion', link: '/components/accordion' },
+            { label: 'Action List', link: '/components/action-list' },
+            { label: 'Action Menu', link: '/components/action-menu' },
+            { label: 'Alert', link: '/components/alert' },
+            { label: 'Avatar', link: '/components/avatar' },
+            { label: 'Badge', link: '/components/badge' },
+            { label: 'Breadcrumbs', link: '/components/breadcrumbs' },
+            { label: 'Button', link: '/components/button' },
+            { label: 'Card', link: '/components/card' },
+            { label: 'Code', link: '/components/code' },
+            { label: 'Command Menu', link: '/components/command-menu' },
+            { label: 'Dialog', link: '/components/dialog' },
+            { label: 'Divider', link: '/components/divider' },
+          ],
         },
       ],
       customCss: ['./src/styles/custom.css'],
