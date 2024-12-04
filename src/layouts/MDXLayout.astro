@@ -13,12 +13,12 @@ const { Content } = await entry.render()
 
 <DocsLayout title={entry.data.title} description={entry.data.description}>
   <div class="prose dark:prose-invert max-w-none">
-    <h1 class="mb-8">
+    <div class="text-[15px] leading-[19.6px] tracking-[-0.0045em] font-normal text-[#666687] mb-8">
       {entry.data.group && (
-        <span class="text-gray-500 dark:text-gray-400">{entry.data.group} / </span>
+        <span>{entry.data.group} / </span>
       )}
-      {entry.data.title}
-    </h1>
+      <span class="text-[#2D2D31] dark:text-white">{entry.data.title}</span>
+    </div>
     <Content components={MDXComponents} />
   </div>
 </DocsLayout>
