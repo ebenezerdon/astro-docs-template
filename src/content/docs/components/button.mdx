@@ -1,0 +1,81 @@
+---
+title: Button
+description: A versatile UI element used for initiating actions or submitting data in your application.
+---
+
+import Button from '../../../components/Button.svelte'
+
+## Overview
+
+The Button component is a versatile UI element used for initiating actions or submitting data in your application. It is one of the most common interactive elements and is designed to be highly customizable to meet different use cases.
+
+## Usage
+
+The Button component should be used to perform primary or secondary actions within your UI. It is important to choose the correct button style depending on the importance of the action.
+
+### Button Variants
+
+<div class="flex flex-wrap gap-4 my-8">
+  <Button variant="primary" client:load>
+    Primary Button
+  </Button>
+  <Button variant="secondary" client:load>
+    Secondary Button
+  </Button>
+  <Button variant="tertiary" client:load>
+    Tertiary Button
+  </Button>
+</div>
+
+```svelte
+<Button variant="primary">Primary Button</Button>
+<Button variant="secondary">Secondary Button</Button>
+<Button variant="tertiary">Tertiary Button</Button>
+```
+
+### Button Sizes
+
+<div class="flex flex-wrap items-center gap-4 my-8">
+  <Button size="small" client:load>
+    Small
+  </Button>
+  <Button size="default" client:load>
+    Default
+  </Button>
+  <Button size="large" client:load>
+    Large
+  </Button>
+</div>
+
+```svelte
+<Button size="small">Small</Button>
+<Button size="default">Default</Button>
+<Button size="large">Large</Button>
+```
+
+### Disabled State
+
+<div class="flex flex-wrap gap-4 my-8">
+  <Button disabled client:load>
+    Disabled Button
+  </Button>
+</div>
+
+```svelte
+<Button disabled>Disabled Button</Button>
+```
+
+## Props
+
+| Prop     | Type                                   | Default   | Description                            |
+| -------- | -------------------------------------- | --------- | -------------------------------------- |
+| variant  | 'primary' \| 'secondary' \| 'tertiary' | 'primary' | The visual style variant of the button |
+| size     | 'small' \| 'default' \| 'large'        | 'default' | The size of the button                 |
+| disabled | boolean                                | false     | Whether the button is disabled         |
+| type     | 'button' \| 'submit' \| 'reset'        | 'button'  | The HTML button type                   |
+
+## Accessibility
+
+- Buttons are focusable and can be triggered using both mouse and keyboard
+- When disabled, buttons cannot be focused and clearly show their disabled state
+- The component supports ARIA attributes through props

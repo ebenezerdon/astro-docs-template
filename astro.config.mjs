@@ -1,29 +1,39 @@
 import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
 import svelte from '@astrojs/svelte'
+import tailwind from '@astrojs/tailwind'
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     starlight({
-      title: 'My Docs',
+      title: 'Design System',
       social: {
-        github: 'https://github.com/withastro/starlight',
+        github: 'https://github.com/yourusername/your-repo',
       },
       sidebar: [
         {
-          label: 'Guides',
+          label: 'Getting Started',
+          items: [{ label: 'Introduction', slug: 'introduction' }],
+        },
+        {
+          label: 'Foundations',
           items: [
-            // Each item here is one entry in the navigation menu.
-            { label: 'Example Guide', slug: 'guides/example' },
+            { label: 'Colors', slug: 'foundations/colors' },
+            { label: 'Typography', slug: 'foundations/typography' },
+            { label: 'Spacing', slug: 'foundations/spacing' },
           ],
         },
         {
-          label: 'Reference',
-          autogenerate: { directory: 'reference' },
+          label: 'Components',
+          items: [{ label: 'Button', slug: 'components/button' }],
         },
       ],
+      customCss: ['./src/styles/custom.css'],
     }),
     svelte(),
+    tailwind({
+      applyBaseStyles: false,
+    }),
   ],
 })
