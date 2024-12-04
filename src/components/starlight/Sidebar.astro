@@ -1,6 +1,20 @@
 ---
 import type { Props } from '@astrojs/starlight/props';
 
+interface Link {
+  type: 'link';
+  label: string;
+  href: string;
+}
+
+interface Group {
+  type: 'group';
+  label: string;
+  entries: Link[];
+}
+
+type SidebarEntry = Link | Group;
+
 const { sidebar } = Astro.props;
 const currentPath = Astro.url.pathname;
 
@@ -10,68 +24,72 @@ const isCurrentPage = (path: string) => {
 ---
 
 <div class="sl-sidebar">
-  <div class="top-level-nav">
-    <a href="/" class="nav-item top-level-item" aria-current={isCurrentPage('/') ? 'page' : undefined}>Home</a>
-    <a href="/getting-started" class="nav-item top-level-item" aria-current={isCurrentPage('/getting-started') ? 'page' : undefined}>Getting Started</a>
-    <a href="/design-tokens" class="nav-item top-level-item" aria-current={isCurrentPage('/design-tokens') ? 'page' : undefined}>Design Tokens</a>
+  <div class="top-level">
+    {
+      sidebar.slice(0, 3).map((entry) => {
+        if (entry.type !== 'link') return null;
+        return (
+          <a
+            href={entry.href}
+            class="nav-item top-level-item"
+            aria-current={isCurrentPage(entry.href) ? 'page' : undefined}
+          >
+            {entry.label}
+          </a>
+        );
+      })
+    }
   </div>
 
-  <div class="section-divider"></div>
-
-  <div class="nav-section">
-    <div class="section-header">
-      <span>FOUNDATIONS</span>
-    </div>
-    <div class="nav-items">
-      <a href="/foundations/colors" class="nav-item" aria-current={isCurrentPage('/foundations/colors') ? 'page' : undefined}>Colors</a>
-      <a href="/foundations/typography" class="nav-item" aria-current={isCurrentPage('/foundations/typography') ? 'page' : undefined}>Typography</a>
-      <a href="/foundations/border-radius" class="nav-item" aria-current={isCurrentPage('/foundations/border-radius') ? 'page' : undefined}>Border Radius</a>
-      <a href="/foundations/elevation" class="nav-item" aria-current={isCurrentPage('/foundations/elevation') ? 'page' : undefined}>Elevation</a>
-      <a href="/foundations/spacing" class="nav-item" aria-current={isCurrentPage('/foundations/spacing') ? 'page' : undefined}>Spacing</a>
-      <a href="/foundations/icons" class="nav-item" aria-current={isCurrentPage('/foundations/icons') ? 'page' : undefined}>Icons</a>
-      <a href="/foundations/grids" class="nav-item" aria-current={isCurrentPage('/foundations/grids') ? 'page' : undefined}>Grids</a>
-    </div>
-  </div>
-
-  <div class="section-divider"></div>
-
-  <div class="nav-section">
-    <div class="section-header">
-      <span>COMPONENTS</span>
-    </div>
-    <div class="nav-items">
-      <a href="/components/accordion" class="nav-item" aria-current={isCurrentPage('/components/accordion') ? 'page' : undefined}>Accordion</a>
-      <a href="/components/action-list" class="nav-item" aria-current={isCurrentPage('/components/action-list') ? 'page' : undefined}>Action List</a>
-      <a href="/components/action-menu" class="nav-item" aria-current={isCurrentPage('/components/action-menu') ? 'page' : undefined}>Action Menu</a>
-      <a href="/components/alert" class="nav-item" aria-current={isCurrentPage('/components/alert') ? 'page' : undefined}>Alert</a>
-      <a href="/components/avatar" class="nav-item" aria-current={isCurrentPage('/components/avatar') ? 'page' : undefined}>Avatar</a>
-      <a href="/components/badge" class="nav-item" aria-current={isCurrentPage('/components/badge') ? 'page' : undefined}>Badge</a>
-      <a href="/components/breadcrumbs" class="nav-item" aria-current={isCurrentPage('/components/breadcrumbs') ? 'page' : undefined}>Breadcrumbs</a>
-      <a href="/components/button" class="nav-item" aria-current={isCurrentPage('/components/button') ? 'page' : undefined}>Button</a>
-      <a href="/components/card" class="nav-item" aria-current={isCurrentPage('/components/card') ? 'page' : undefined}>Card</a>
-      <a href="/components/code" class="nav-item" aria-current={isCurrentPage('/components/code') ? 'page' : undefined}>Code</a>
-      <a href="/components/command-menu" class="nav-item" aria-current={isCurrentPage('/components/command-menu') ? 'page' : undefined}>Command Menu</a>
-      <a href="/components/dialog" class="nav-item" aria-current={isCurrentPage('/components/dialog') ? 'page' : undefined}>Dialog</a>
-      <a href="/components/divider" class="nav-item" aria-current={isCurrentPage('/components/divider') ? 'page' : undefined}>Divider</a>
-    </div>
+  <div class="nav-sections">
+    {
+      sidebar.slice(3).map((entry, index) => {
+        if (entry.type !== 'group') return null;
+        return (
+          <div class:list={['nav-section', { 'border-t border-gray-100 dark:border-gray-800 pt-4': index === 0 }]}>
+            <div class="section-header">
+              <span>{entry.label}</span>
+            </div>
+            <div class="nav-items">
+              {entry.entries.map((item) => {
+                if (item.type !== 'link') return null
+                return (
+                  <a
+                    href={item.href}
+                    class="nav-item"
+                    aria-current={isCurrentPage(item.href) ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                )
+              })}
+            </div>
+          </div>
+        );
+      })
+    }
   </div>
 </div>
 
 <style>
   .sl-sidebar {
-    @apply h-full py-2;
+    @apply h-full py-4;
   }
 
-  .top-level-nav {
-    @apply space-y-0 mb-4;
+  .top-level {
+    @apply space-y-0.5 mb-4;
+  }
+
+  .nav-sections {
+    @apply space-y-6;
   }
 
   .nav-section {
-    @apply space-y-0.5;
+    @apply space-y-1;
   }
 
   .nav-item {
-    @apply block py-1.5 px-4 text-[15px] text-[#56565C] hover:text-[#2D2D31] no-underline transition-colors;
+    @apply block py-2 px-4 text-[15px] text-[#56565C] hover:text-[#2D2D31] no-underline transition-colors;
   }
 
   .top-level-item {
@@ -83,11 +101,12 @@ const isCurrentPage = (path: string) => {
   }
 
   .nav-items {
-    @apply space-y-0;
+    @apply space-y-0.5;
   }
 
-  .section-divider {
-    @apply my-3 border-t border-gray-100;
+  /* Current page indicator */
+  .nav-item[aria-current="page"] {
+    @apply bg-[#F4F4F7] text-[#2D2D31] font-normal;
   }
 
   /* Dark mode overrides */
@@ -97,15 +116,6 @@ const isCurrentPage = (path: string) => {
 
   :global(.dark) .section-header {
     @apply text-gray-500;
-  }
-
-  :global(.dark) .section-divider {
-    @apply border-gray-800;
-  }
-
-  /* Current page indicator */
-  .nav-item[aria-current="page"] {
-    @apply bg-[#F4F4F7] text-[#2D2D31] font-normal;
   }
 
   :global(.dark) .nav-item[aria-current="page"] {

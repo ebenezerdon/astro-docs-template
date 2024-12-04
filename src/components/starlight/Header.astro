@@ -1,7 +1,12 @@
 ---
-import type { Props } from '@astrojs/starlight/props';
+import type { Props } from '@astrojs/starlight/props'
 
-const { logo } = Astro.props;
+interface Logo {
+  src: string
+  alt?: string
+}
+
+const { logo } = Astro.props as { logo?: Logo }
 ---
 
 <div class="header">
@@ -26,7 +31,7 @@ const { logo } = Astro.props;
 
 <style>
   .header {
-    @apply h-14 border-b border-gray-200 flex items-center px-4;
+    @apply h-14 border-b border-gray-100 flex items-center px-4;
   }
 
   .site-title {
@@ -46,6 +51,11 @@ const { logo } = Astro.props;
   }
 
   .documentation {
-    @apply text-gray-500 font-normal;
+    @apply text-gray-400 font-normal;
+  }
+
+  /* Dark mode overrides */
+  :global(.dark) .header {
+    @apply border-gray-800;
   }
 </style>
