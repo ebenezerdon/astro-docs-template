@@ -1,0 +1,29 @@
+---
+import type { Props } from '@astrojs/starlight/props'
+
+const { entry } = Astro.props
+---
+
+<h1>
+  {entry.data.group && (
+    <span class="group">{entry.data.group} / </span>
+  )}
+  {entry.data.title}
+</h1>
+
+<style>
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .group {
+    color: #666;
+  }
+
+  :global(.dark) .group {
+    color: #999;
+  }
+</style>

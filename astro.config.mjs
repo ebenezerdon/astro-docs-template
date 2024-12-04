@@ -14,6 +14,7 @@ export default defineConfig({
       components: {
         Header: './src/components/starlight/Header.astro',
         Sidebar: './src/components/starlight/Sidebar.astro',
+        PageTitle: './src/components/starlight/PageTitle.astro',
       },
       social: {
         github: 'https://github.com/yourusername/your-repo',
