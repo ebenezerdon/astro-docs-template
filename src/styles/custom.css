@@ -22,10 +22,6 @@
   --sl-sidebar-width: 16rem;
 }
 
-.sl-sidebar {
-  @apply border-r border-gray-200 dark:border-gray-800;
-}
-
 /* Remove default padding from sidebar */
 aside.sl-sidebar > div:first-child {
   @apply p-0;
