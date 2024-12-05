@@ -37,14 +37,6 @@
     document.documentElement.classList.toggle('dark', isDark)
   }
 
-  const toggleLeftSidebar = () => {
-    const sidebar = document.getElementById('left-sidebar')
-    if (sidebar) {
-      sidebar.classList.toggle('-translate-x-full')
-      layoutStore.toggleLeftSidebar()
-    }
-  }
-
   const toggleRightSidebar = () => {
     const sidebar = document.getElementById('right-sidebar')
     if (sidebar) {
@@ -56,25 +48,13 @@
 
 <header class="fixed top-0 left-0 right-0 z-50 h-14 border-b border-[#EDEDF0] bg-white dark:bg-gray-900 dark:border-gray-800">
   <div class="h-full px-4 flex items-center justify-between">
-    <div class="flex items-center gap-4">
-      <button
-        on:click={toggleLeftSidebar}
-        class="lg:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
-        aria-label="Toggle navigation menu"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-
-      <a href="/" class="flex items-center gap-2">
-        <img src="/src/assets/logo.svg" alt="Logo" class="h-8 w-8" />
-        <div class="flex items-center gap-2">
-          <span class="text-[#19191C] dark:text-white font-medium">Acme Inc.</span>
-          <span class="text-gray-400 hidden sm:inline">Documentation</span>
-        </div>
-      </a>
-    </div>
+    <a href="/" class="flex items-center gap-2">
+      <img src="/src/assets/logo.svg" alt="Logo" class="h-8 w-8" />
+      <div class="flex items-center gap-2">
+        <span class="text-[#19191C] dark:text-white font-medium">Acme Inc.</span>
+        <span class="text-gray-400 hidden sm:inline">Documentation</span>
+      </div>
+    </a>
 
     <div class="flex items-center gap-2 sm:gap-4">
       <div class="hidden sm:block">

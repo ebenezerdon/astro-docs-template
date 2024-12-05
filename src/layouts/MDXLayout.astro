@@ -2,6 +2,8 @@
 import DocsLayout from './DocsLayout.astro'
 import type { CollectionEntry } from 'astro:content'
 import * as MDXComponents from '@components/mdx'
+import MobileBreadcrumb from '@components/MobileBreadcrumb.svelte'
+import DesktopBreadcrumb from '@components/DesktopBreadcrumb.svelte'
 
 interface Props {
   entry: CollectionEntry<'docs'>
@@ -12,13 +14,17 @@ const { Content } = await entry.render()
 ---
 
 <DocsLayout title={entry.data.title} description={entry.data.description}>
+  <MobileBreadcrumb
+    client:load
+    group={entry.data.group}
+    title={entry.data.title}
+  />
   <div class="prose dark:prose-invert max-w-none">
-    <div class="text-[15px] leading-[19.6px] tracking-[-0.0045em] font-normal text-[#666687] mb-8">
-      {entry.data.group && (
-        <span>{entry.data.group} / </span>
-      )}
-      <span class="text-[#2D2D31] dark:text-white">{entry.data.title}</span>
-    </div>
+    <DesktopBreadcrumb
+      client:load
+      group={entry.data.group}
+      title={entry.data.title}
+    />
     <h1 class="mt-0 mb-6">{entry.data.title}</h1>
     <Content components={MDXComponents} />
   </div>
