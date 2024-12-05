@@ -7,11 +7,8 @@
   let isDark = false
 
   onMount(() => {
-    // Initialize theme to light if not set
-    const theme = localStorage.getItem('theme') ?? 'light'
-    const isDarkMode = theme === 'dark'
-    document.documentElement.classList.toggle('dark', isDarkMode)
-    isDark = isDarkMode
+    // Initialize isDark state from current class
+    isDark = document.documentElement.classList.contains('dark')
 
     // Create mutation observer to keep isDark in sync
     const observer = new MutationObserver((mutations) => {
@@ -31,8 +28,7 @@
   })
 
   const toggleTheme = () => {
-    const theme = localStorage.getItem('theme') ?? 'light'
-    const newTheme = theme === 'light' ? 'dark' : 'light'
+    const newTheme = isDark ? 'light' : 'dark'
     localStorage.setItem('theme', newTheme)
     document.documentElement.classList.toggle('dark', newTheme === 'dark')
   }

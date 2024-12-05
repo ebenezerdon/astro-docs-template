@@ -21,26 +21,15 @@ const { title, description } = Astro.props
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-
-    <!-- Theme initialization script - must run before any content renders -->
+    <!-- Prevent flash of wrong theme -->
     <script is:inline>
-      const setTheme = () => {
-        const theme = localStorage.getItem('theme') ?? 'system'
-        const isDark = theme === 'dark' ||
-          (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
-
-        document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
-        return theme
-      }
-
-      // Set initial theme
-      setTheme()
-
-      // Handle system theme changes
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        if (localStorage.getItem('theme') !== 'system') return
-        setTheme()
-      })
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme')
+        }
+        return 'light'
+      })()
+      document.documentElement.classList[theme === 'dark' ? 'add' : 'remove']('dark')
     </script>
   </head>
   <body class="min-h-screen bg-[#FAFAFB] dark:bg-gray-900">
