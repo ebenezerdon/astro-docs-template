@@ -11,6 +11,9 @@ interface Props {
 
 const { entry } = Astro.props
 const { Content } = await entry.render()
+
+// This will be different on each request if SSR is working
+const serverTime = new Date().toISOString()
 ---
 
 <DocsLayout title={entry.data.title} description={entry.data.description}>
@@ -26,6 +29,7 @@ const { Content } = await entry.render()
       title={entry.data.title}
     />
     <h1 class="mt-0 mb-6">{entry.data.title}</h1>
+    <p class="text-sm text-gray-500">Page rendered at: {serverTime}</p>
     <Content components={MDXComponents} />
   </div>
 </DocsLayout>
