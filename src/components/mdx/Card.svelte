@@ -1,17 +1,28 @@
 <script lang="ts">
+  import { Download, Palette, PuzzlePiece, Book } from 'lucide-svelte'
+
   export let title: string = ''
   export let icon: string = ''
+
+  const iconMap = {
+    download: Download,
+    palette: Palette,
+    puzzle: PuzzlePiece,
+    book: Book
+  }
+
+  const IconComponent = iconMap[icon as keyof typeof iconMap]
 </script>
 
 <div class="card">
-  <div class="header">
-    {#if icon}
-      <span class="icon">{icon}</span>
+  <h3 class="title">
+    {#if IconComponent}
+      <span class="icon" aria-hidden="true">
+        <svelte:component this={IconComponent} size={24} strokeWidth={2} />
+      </span>
     {/if}
-    {#if title}
-      <h3>{title}</h3>
-    {/if}
-  </div>
+    {title}
+  </h3>
   <div class="content">
     <slot />
   </div>
@@ -19,23 +30,19 @@
 
 <style lang="postcss">
   .card {
-    @apply border border-gray-200 dark:border-gray-800 rounded-lg p-6 bg-white dark:bg-gray-900;
+    @apply border border-[#DCDCE4] dark:border-gray-800 rounded-lg p-6 bg-white dark:bg-gray-900;
   }
 
-  .header {
-    @apply flex items-center gap-3 mb-2;
+  .title {
+    @apply flex items-center gap-3 text-[18px] leading-[23.4px] tracking-[-0.0045em] font-medium text-[#19191C] dark:text-white mb-3;
   }
 
   .icon {
-    @apply text-[#4945FF] dark:text-blue-400 text-xl;
-  }
-
-  h3 {
-    @apply text-lg font-medium text-[#2D2D31] dark:text-white;
+    @apply text-[#19191C] dark:text-white inline-flex items-center;
   }
 
   .content {
-    @apply text-[#56565C] dark:text-gray-400;
+    @apply text-[15px] leading-[19.6px] tracking-[-0.0045em] text-[#666687] dark:text-gray-400;
   }
 
   .content :global(p) {
