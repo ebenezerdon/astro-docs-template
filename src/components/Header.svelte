@@ -6,8 +6,11 @@
   let isDark = false
 
   onMount(() => {
-    // Initialize isDark state
-    isDark = document.documentElement.classList.contains('dark')
+    // Initialize theme to light if not set
+    const theme = localStorage.getItem('theme') ?? 'light'
+    const isDarkMode = theme === 'dark'
+    document.documentElement.classList.toggle('dark', isDarkMode)
+    isDark = isDarkMode
 
     // Create mutation observer to keep isDark in sync
     const observer = new MutationObserver((mutations) => {
@@ -27,14 +30,10 @@
   })
 
   const toggleTheme = () => {
-    const theme = localStorage.getItem('theme') ?? 'system'
-    const newTheme = theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light'
+    const theme = localStorage.getItem('theme') ?? 'light'
+    const newTheme = theme === 'light' ? 'dark' : 'light'
     localStorage.setItem('theme', newTheme)
-
-    const isDark = newTheme === 'dark' ||
-      (newTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
-
-    document.documentElement.classList.toggle('dark', isDark)
+    document.documentElement.classList.toggle('dark', newTheme === 'dark')
   }
 
   const toggleRightSidebar = () => {
