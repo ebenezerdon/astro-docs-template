@@ -110,7 +110,7 @@
       bind:this={searchInput}
       type="search"
       placeholder="Search documentation..."
-      class="w-[300px] pl-10 pr-16 py-1.5 rounded-full bg-[#f0f0f1] dark:bg-gray-800 border border-transparent focus:border-[#4945FF] dark:focus:border-[#4945FF] outline-none text-[15px] leading-[19.6px] tracking-[-0.0045em]"
+      class="w-[300px] pl-10 pr-16 py-1.5 rounded-full bg-[#f0f0f1] dark:bg-gray-800 border border-transparent focus:border-[#19191C] dark:focus:border-gray-600 outline-none text-[15px] leading-[19.6px] tracking-[-0.0045em]"
       on:input={handleSearch}
       on:keydown={handleKeyDown}
     />

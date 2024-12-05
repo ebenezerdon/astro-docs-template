@@ -33,7 +33,7 @@
 }
 
 .prose a {
-  @apply text-[#4945FF] dark:text-blue-400 no-underline hover:underline;
+  @apply text-[#19191C] dark:text-gray-300 no-underline hover:underline;
 }
 
 .prose ul {
