@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import Fuse from 'fuse.js'
+  import { Search as SearchIcon } from 'lucide-svelte'
 
   interface SearchResult {
     title: string
@@ -51,14 +52,22 @@
 </script>
 
 <div class="relative">
-  <input
-    bind:this={searchInput}
-    type="search"
-    placeholder="Search documentation..."
-    class="w-64 px-4 py-1.5 rounded-md bg-gray-100 dark:bg-gray-800 border border-transparent focus:border-[#4945FF] dark:focus:border-[#4945FF] outline-none"
-    on:input={handleSearch}
-    on:keydown={handleKeyDown}
-  />
+  <div class="relative">
+    <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+      <SearchIcon class="h-5 w-5 text-gray-400" />
+    </div>
+    <input
+      bind:this={searchInput}
+      type="search"
+      placeholder="Search documentation..."
+      class="w-[300px] pl-10 pr-16 py-1.5 rounded-full bg-[#f4f4f4] dark:bg-gray-800 border border-transparent focus:border-[#4945FF] dark:focus:border-[#4945FF] outline-none text-[15px] leading-[19.6px] tracking-[-0.0045em]"
+      on:input={handleSearch}
+      on:keydown={handleKeyDown}
+    />
+    <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+      <kbd class="px-1.5 py-0.5 text-xs text-gray-400 bg-[#ebebec] dark:bg-gray-700 rounded-[4px] border border-gray-200 dark:border-gray-600">⌘K</kbd>
+    </div>
+  </div>
 
   {#if isSearching && searchResults.length > 0}
     <div class="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 max-h-96 overflow-y-auto">
