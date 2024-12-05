@@ -1,55 +1,124 @@
-# Starlight Starter Kit: Basics
+# Modern Documentation Template
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+A sleek and modern documentation site template built with Astro, Svelte, and Tailwind CSS. Features a clean design, full-text search, dark mode support, and responsive layout.
 
+## Features
+
+- 🚀 **Built with Astro** - Fast, modern static site generation
+- ⚡️ **Svelte Components** - Interactive UI components with great DX
+- 🎨 **Tailwind CSS** - Utility-first CSS framework
+- 🔍 **Full-text Search** - Fast client-side search with Fuse.js
+- 🌙 **Dark Mode** - Elegant light and dark theme support
+- 📱 **Responsive Design** - Mobile-first, adaptive layout
+- 🧩 **MDX Support** - Write content in MDX with component support
+- 📝 **Clean Typography** - Beautiful content styling with Tailwind Typography
+
+## Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/ebenezerdon/docs-template.git
+
+# Navigate to the project
+cd docs-template
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
-npm create astro@latest -- --template starlight
-```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/starlight/tree/main/examples/basics)
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/withastro/starlight&create_from_path=examples/basics)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwithastro%2Fstarlight%2Ftree%2Fmain%2Fexamples%2Fbasics&project-name=my-starlight-docs&repository-name=my-starlight-docs)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+## Project Structure
 
 ```
 .
 ├── public/
 ├── src/
 │   ├── assets/
+│   ├── components/
 │   ├── content/
 │   │   ├── docs/
 │   │   └── config.ts
-│   └── env.d.ts
+│   ├── layouts/
+│   ├── pages/
+│   └── styles/
 ├── astro.config.mjs
 ├── package.json
 └── tsconfig.json
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+## Adding Content
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+1. Add your documentation content in MDX format under `src/content/docs/`:
 
-Static assets, like favicons, can be placed in the `public/` directory.
+```md
+---
+title: Getting Started
+description: Learn how to use our product
+group: Overview
+---
 
-## 🧞 Commands
+# Getting Started
 
-All commands are run from the root of the project, from a terminal:
+Welcome to our documentation...
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+2. Configure the navigation in `src/components/Sidebar.svelte`:
 
-## 👀 Want to learn more?
+```ts
+const navigation = [
+  {
+    label: 'Getting Started',
+    link: '/getting-started',
+  },
+  {
+    label: 'FOUNDATIONS',
+    items: [
+      { label: 'Colors', link: '/foundations/colors' },
+      { label: 'Typography', link: '/foundations/typography' },
+    ],
+  },
+]
+```
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+The sidebar navigation needs to be configured to match your content structure. This gives you full control over the organization and grouping of your documentation.
+
+## Customization
+
+### Theme
+
+Customize colors, typography, and other design tokens in `tailwind.config.mjs`:
+
+```js
+theme: {
+  extend: {
+    colors: {
+      primary: {
+        // Your color palette
+      }
+    }
+  }
+}
+```
+
+### Components
+
+Add or modify components in `src/components/`. The template uses Svelte for interactive components and Astro for page layout.
+
+## Development
+
+```bash
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## License
+
+MIT License - feel free to use this template for your own documentation needs.
