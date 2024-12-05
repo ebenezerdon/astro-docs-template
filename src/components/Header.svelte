@@ -37,13 +37,13 @@
   }
 </script>
 
-<header class="fixed top-0 left-0 right-0 z-50 h-14 border-b border-gray-200 bg-white dark:bg-gray-900 dark:border-gray-800">
+<header class="fixed top-0 left-0 right-0 z-50 h-14 border-b border-[#EDEDF0] bg-white dark:bg-gray-900 dark:border-gray-800">
   <div class="h-full px-4 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="flex items-center gap-2">
       <img src="/src/assets/logo.svg" alt="Logo" class="h-8 w-8" />
       <div class="flex items-center gap-2">
-        <span class="text-[#4945FF] font-medium">Acme Inc.</span>
+        <span class="text-[#19191C] dark:text-white font-medium">Acme Inc.</span>
         <span class="text-gray-400">Documentation</span>
       </div>
     </a>

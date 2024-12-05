@@ -43,12 +43,12 @@ const { title, description } = Astro.props
       })
     </script>
   </head>
-  <body class="min-h-screen bg-white dark:bg-gray-900">
+  <body class="min-h-screen bg-[#FAFAFB] dark:bg-gray-900">
     <Header client:load />
 
     <div class="flex pt-14">
       <!-- Left Sidebar -->
-      <aside class="fixed top-14 left-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-r border-gray-200 dark:border-gray-800">
+      <aside class="fixed top-14 left-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-r border-[#EDEDF0] bg-white dark:bg-gray-900 dark:border-gray-800">
         <Sidebar client:load />
       </aside>
 
@@ -60,7 +60,7 @@ const { title, description } = Astro.props
       </div>
 
       <!-- Right Sidebar -->
-      <aside class="fixed top-14 right-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-l border-gray-200 dark:border-gray-800">
+      <aside class="fixed top-14 right-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-l border-[#EDEDF0] bg-[#FAFAFB] dark:bg-gray-900 dark:border-gray-800">
         <TableOfContents client:load />
       </aside>
     </div>

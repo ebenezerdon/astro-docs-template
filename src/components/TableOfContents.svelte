@@ -57,7 +57,7 @@
       <li style="padding-left: {(item.level - 2) * 16}px">
         <a
           href="#{item.id}"
-          class="block py-1 text-sm text-[#56565C] hover:text-[#2D2D31] dark:text-gray-400 dark:hover:text-white no-underline transition-colors"
+          class="block py-1 text-sm text-[#56565C] hover:text-[#19191C] dark:text-gray-400 dark:hover:text-white no-underline transition-colors"
           class:active={activeId === item.id}
         >
           {item.text}
@@ -69,6 +69,6 @@
 
 <style lang="postcss">
   .active {
-    @apply text-[#4945FF] dark:text-white font-medium;
+    @apply text-[#19191C] dark:text-white font-medium;
   }
 </style>

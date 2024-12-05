@@ -79,7 +79,7 @@
     <!-- Groups -->
     {#each navigation.slice(3) as item}
       {#if item.items}
-        <div class="pt-6 border-t border-gray-200 dark:border-gray-800">
+        <div class="pt-6 first:border-t first:border-[#EDEDF0] first:w-[210px] first:mx-auto">
           <div class="px-4 mb-3 text-[13px] leading-[15.6px] tracking-[-0.01em] font-medium text-[#2D2D31] dark:text-white uppercase">
             {item.label}
           </div>
