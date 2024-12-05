@@ -9,7 +9,7 @@ const { slug } = Astro.params
 const docs = await getCollection('docs')
 
 // Find the matching entry
-const entry = docs.find((doc) => {
+const entry = docs.find((doc: CollectionEntry<'docs'>) => {
   if (!slug) return doc.slug === 'index'
   return doc.slug === slug
 })
