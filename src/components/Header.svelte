@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import Search from './Search.svelte'
+  import { layoutStore } from '../stores/layout'
 
   let isDark = false
 
@@ -35,22 +36,50 @@
 
     document.documentElement.classList.toggle('dark', isDark)
   }
+
+  const toggleLeftSidebar = () => {
+    const sidebar = document.getElementById('left-sidebar')
+    if (sidebar) {
+      sidebar.classList.toggle('-translate-x-full')
+      layoutStore.toggleLeftSidebar()
+    }
+  }
+
+  const toggleRightSidebar = () => {
+    const sidebar = document.getElementById('right-sidebar')
+    if (sidebar) {
+      sidebar.classList.toggle('translate-x-full')
+      layoutStore.toggleRightSidebar()
+    }
+  }
 </script>
 
 <header class="fixed top-0 left-0 right-0 z-50 h-14 border-b border-[#EDEDF0] bg-white dark:bg-gray-900 dark:border-gray-800">
   <div class="h-full px-4 flex items-center justify-between">
-    <!-- Logo -->
-    <a href="/" class="flex items-center gap-2">
-      <img src="/src/assets/logo.svg" alt="Logo" class="h-8 w-8" />
-      <div class="flex items-center gap-2">
-        <span class="text-[#19191C] dark:text-white font-medium">Acme Inc.</span>
-        <span class="text-gray-400">Documentation</span>
-      </div>
-    </a>
-
-    <!-- Search and theme toggle -->
     <div class="flex items-center gap-4">
-      <Search />
+      <button
+        on:click={toggleLeftSidebar}
+        class="lg:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+        aria-label="Toggle navigation menu"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <a href="/" class="flex items-center gap-2">
+        <img src="/src/assets/logo.svg" alt="Logo" class="h-8 w-8" />
+        <div class="flex items-center gap-2">
+          <span class="text-[#19191C] dark:text-white font-medium">Acme Inc.</span>
+          <span class="text-gray-400 hidden sm:inline">Documentation</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-2 sm:gap-4">
+      <div class="hidden sm:block">
+        <Search />
+      </div>
 
       <button
         on:click={toggleTheme}
@@ -68,6 +97,16 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>
         {/if}
+      </button>
+
+      <button
+        on:click={toggleRightSidebar}
+        class="lg:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+        aria-label="Toggle table of contents"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+        </svg>
       </button>
     </div>
   </div>

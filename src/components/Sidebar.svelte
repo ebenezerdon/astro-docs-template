@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { layoutStore } from '../stores/layout'
+
   interface NavItem {
     label: string
     link?: string
@@ -56,9 +58,17 @@
     if (!path) return false
     return currentPath === path || currentPath === path + '/'
   }
+
+  function handleNavigation() {
+    const sidebar = document.getElementById('left-sidebar')
+    if (window.innerWidth < 1024 && sidebar) {
+      sidebar.classList.add('-translate-x-full')
+      layoutStore.closeAll()
+    }
+  }
 </script>
 
-<nav class="h-full py-6 px-4">
+<nav class="h-full overflow-y-auto py-6 px-4">
   <div class="space-y-6">
     <!-- Top level items -->
     <div class="space-y-1">
@@ -69,6 +79,7 @@
             class="block py-2 px-4 text-[15px] leading-[19.6px] tracking-[-0.0045em] font-normal text-[#666687] hover:text-[#2D2D31] no-underline transition-colors"
             class:active={isCurrentPage(item.link)}
             aria-current={isCurrentPage(item.link) ? 'page' : undefined}
+            on:click={handleNavigation}
           >
             {item.label}
           </a>
@@ -91,6 +102,7 @@
                   class="block py-2 px-4 text-[15px] leading-[19.6px] tracking-[-0.0045em] font-normal text-[#666687] hover:text-[#2D2D31] no-underline transition-colors"
                   class:active={isCurrentPage(subItem.link)}
                   aria-current={isCurrentPage(subItem.link) ? 'page' : undefined}
+                  on:click={handleNavigation}
                 >
                   {subItem.label}
                 </a>

@@ -48,19 +48,19 @@ const { title, description } = Astro.props
 
     <div class="flex pt-14">
       <!-- Left Sidebar -->
-      <aside class="fixed top-14 left-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-r border-[#EDEDF0] bg-white dark:bg-gray-900 dark:border-gray-800">
+      <aside class="fixed top-14 left-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-r border-[#EDEDF0] bg-white dark:bg-gray-900 dark:border-gray-800 lg:translate-x-0 transform -translate-x-full transition-transform duration-200 ease-in-out" id="left-sidebar">
         <Sidebar client:load />
       </aside>
 
       <!-- Main content -->
-      <div class="flex-1 mx-64">
-        <main class="max-w-4xl mx-auto px-8 py-12">
+      <div class="flex-1 w-full lg:pl-64 lg:pr-64">
+        <main class="max-w-4xl mx-auto px-4 lg:px-8 py-12">
           <slot />
         </main>
       </div>
 
       <!-- Right Sidebar -->
-      <aside class="fixed top-14 right-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-l border-[#EDEDF0] bg-[#FAFAFB] dark:bg-gray-900 dark:border-gray-800">
+      <aside class="fixed top-14 right-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-l border-[#EDEDF0] bg-[#FAFAFB] dark:bg-gray-900 dark:border-gray-800 lg:translate-x-0 transform translate-x-full transition-transform duration-200 ease-in-out" id="right-sidebar">
         <TableOfContents client:load />
       </aside>
     </div>

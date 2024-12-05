@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  import { layoutStore } from '../stores/layout'
 
   interface TOCItem {
     id: string
@@ -48,9 +49,17 @@
       observer.disconnect()
     }
   })
+
+  function handleClick() {
+    const sidebar = document.getElementById('right-sidebar')
+    if (window.innerWidth < 1024 && sidebar) {
+      sidebar.classList.add('translate-x-full')
+      layoutStore.closeAll()
+    }
+  }
 </script>
 
-<nav class="p-4">
+<nav class="p-4 h-full overflow-y-auto">
   <h2 class="text-sm font-medium mb-4 text-[#2D2D31] dark:text-gray-400">ON THIS PAGE</h2>
   <ul class="space-y-2">
     {#each tocItems as item}
@@ -59,6 +68,7 @@
           href="#{item.id}"
           class="block py-1 text-sm text-[#56565C] hover:text-[#19191C] dark:text-gray-400 dark:hover:text-white no-underline transition-colors"
           class:active={activeId === item.id}
+          on:click={handleClick}
         >
           {item.text}
         </a>
