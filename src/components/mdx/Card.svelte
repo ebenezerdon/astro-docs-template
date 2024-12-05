@@ -1,26 +1,24 @@
 <script lang="ts">
-  import { Download, Palette, PuzzlePiece, Book } from 'lucide-svelte'
+  import { Download, Palette, PuzzleIcon, Book } from 'lucide-svelte'
 
   export let title: string = ''
-  export let icon: string = ''
+  export let icon: 'download' | 'palette' | 'puzzle' | 'book' = 'download'
 
-  const iconMap = {
+  const icons = {
     download: Download,
     palette: Palette,
-    puzzle: PuzzlePiece,
-    book: Book
+    puzzle: PuzzleIcon,
+    book: Book,
   }
 
-  const IconComponent = iconMap[icon as keyof typeof iconMap]
+  const Icon = icons[icon]
 </script>
 
 <div class="card">
   <h3 class="title">
-    {#if IconComponent}
-      <span class="icon" aria-hidden="true">
-        <svelte:component this={IconComponent} size={24} strokeWidth={2} />
-      </span>
-    {/if}
+    <span class="icon">
+      <svelte:component this={Icon} size={24} strokeWidth={2} />
+    </span>
     {title}
   </h3>
   <div class="content">
