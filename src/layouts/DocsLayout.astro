@@ -2,6 +2,7 @@
 import Header from '@components/Header.svelte'
 import Sidebar from '@components/Sidebar.svelte'
 import TableOfContents from '@components/TableOfContents.svelte'
+import { getCollection } from 'astro:content'
 import '../styles/custom.css'
 
 interface Props {
@@ -10,6 +11,47 @@ interface Props {
 }
 
 const { title, description } = Astro.props
+
+// Fetch and prepare navigation data
+const docs = await getCollection('docs')
+const sortedDocs = docs.sort((a, b) => {
+  if (a.data.order !== undefined && b.data.order !== undefined) {
+    return a.data.order - b.data.order
+  }
+  return a.data.title.localeCompare(b.data.title)
+})
+
+// Group docs by their group
+const groups = sortedDocs.reduce((acc, doc) => {
+  const group = doc.data.group || 'Ungrouped'
+  if (!acc[group]) acc[group] = []
+  acc[group].push(doc)
+  return acc
+}, {} as Record<string, typeof docs>)
+
+// Create navigation structure
+const navigation = [
+  // Home is always first
+  {
+    label: 'Home',
+    link: '/',
+  },
+  // Then Overview items
+  ...(groups['Overview'] || []).map(doc => ({
+    label: doc.data.title,
+    link: `/${doc.slug === 'index' ? '' : doc.slug}`,
+  })),
+  // Then grouped items
+  ...Object.entries(groups)
+    .filter(([group]) => !['Overview', 'Ungrouped'].includes(group))
+    .map(([group, items]) => ({
+      label: group.toUpperCase(),
+      items: items.map(doc => ({
+        label: doc.data.title,
+        link: `/${doc.slug}`,
+      })),
+    })),
+]
 ---
 
 <!DOCTYPE html>
@@ -38,7 +80,7 @@ const { title, description } = Astro.props
     <div class="flex h-[calc(100vh-3.5rem)] mt-14">
       <!-- Left Sidebar -->
       <aside class="fixed top-14 left-0 z-40 w-64 h-[calc(100vh-3.5rem)] border-r border-[#EDEDF0] bg-white dark:bg-gray-900 dark:border-gray-800 lg:translate-x-0 transform -translate-x-full transition-transform duration-200 ease-in-out" id="left-sidebar">
-        <Sidebar client:load />
+        <Sidebar navigation={navigation} client:load />
       </aside>
 
       <!-- Main content -->
