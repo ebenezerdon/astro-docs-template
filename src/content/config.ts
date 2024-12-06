@@ -9,7 +9,6 @@ const docs = defineCollection({
     title: z.string(),
     description: z.string(),
     group: z.enum(groups).optional(),
-    order: z.number().optional(),
     priority: z.number().optional(),
   }),
 })
