@@ -7,11 +7,12 @@ A sleek and modern documentation site template built with Astro, Svelte, and Tai
 - 🚀 **Built with Astro** - Fast, modern static site generation
 - ⚡️ **Svelte Components** - Interactive UI components with great DX
 - 🎨 **Tailwind CSS** - Utility-first CSS framework
+- 🔍 **MDX Support** - Write content in MDX with component support
 - 🔍 **Full-text Search** - Fast client-side search with Fuse.js
 - 🌙 **Dark Mode** - Elegant light and dark theme support
 - 📱 **Responsive Design** - Mobile-first, adaptive layout
-- 🧩 **MDX Support** - Write content in MDX with component support
-- 📝 **Clean Typography** - Beautiful content styling with Tailwind Typography
+- 🧩 **Auto-generated Navigation** - Sidebar structure from content
+- 🎯 **Priority-based Ordering** - Fine-grained control over navigation order
 
 ## Quick Start
 
@@ -57,6 +58,7 @@ npm run dev
 title: Getting Started
 description: Learn how to use our product
 group: Overview
+priority: 2
 ---
 
 # Getting Started
@@ -64,25 +66,49 @@ group: Overview
 Welcome to our documentation...
 ```
 
-2. Configure the navigation in `src/components/Sidebar.svelte`:
+The sidebar navigation is automatically generated from your content structure. Each MDX file can include these frontmatter fields:
 
-```ts
-const navigation = [
-  {
-    label: 'Getting Started',
-    link: '/getting-started',
-  },
-  {
-    label: 'FOUNDATIONS',
-    items: [
-      { label: 'Colors', link: '/foundations/colors' },
-      { label: 'Typography', link: '/foundations/typography' },
-    ],
-  },
-]
+| Field         | Type   | Required | Description                                       |
+| ------------- | ------ | -------- | ------------------------------------------------- |
+| `title`       | string | Yes      | Page title                                        |
+| `description` | string | Yes      | Page description                                  |
+| `group`       | string | No       | Navigation group (e.g., "Overview", "Components") |
+| `priority`    | number | No       | Navigation order priority (higher = earlier)      |
+| `order`       | number | No       | Fallback ordering within groups                   |
+| `category`    | enum   | No       | Content category                                  |
+
+### Navigation Priority
+
+The `priority` field gives you fine-grained control over your navigation order:
+
+```md
+---
+title: Home
+group: Overview
+priority: 3
+---
+
+---
+
+title: Getting Started
+group: Overview
+priority: 2
+
+---
+
+---
+
+title: Design Tokens
+group: Overview
+priority: 1
+
+---
 ```
 
-The sidebar navigation needs to be configured to match your content structure. This gives you full control over the organization and grouping of your documentation.
+If `priority` is not set, items are sorted by:
+
+1. `order` (if specified)
+2. Alphabetically by title (as fallback)
 
 ## Customization
 
