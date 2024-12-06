@@ -11,6 +11,9 @@ export default defineConfig({
   }),
   markdown: {
     syntaxHighlight: 'prism',
+    prism: {
+      languages: ['typescript', 'javascript', 'css', 'markup', 'bash', 'jsx'],
+    },
   },
   integrations: [
     svelte(),
@@ -26,6 +29,17 @@ export default defineConfig({
         '@components': '/src/components',
         '@layouts': '/src/layouts',
         '@styles': '/src/styles',
+      },
+    },
+    build: {
+      // Reduce build memory usage
+      chunkSizeWarningLimit: 1000,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['svelte', '@astrojs/svelte'],
+          },
+        },
       },
     },
   },

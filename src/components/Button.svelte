@@ -1,7 +1,7 @@
 <script lang="ts">
   export let variant: 'primary' | 'secondary' | 'tertiary' = 'primary'
   export let disabled = false
-  export let type = 'button'
+  export let type: 'button' | 'submit' | 'reset' = 'button'
   export let className = ''
 
   const variantClasses = {
