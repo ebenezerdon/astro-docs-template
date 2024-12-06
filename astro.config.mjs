@@ -31,16 +31,5 @@ export default defineConfig({
         '@styles': '/src/styles',
       },
     },
-    build: {
-      // Reduce build memory usage
-      chunkSizeWarningLimit: 1000,
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vendor: ['svelte', '@astrojs/svelte'],
-          },
-        },
-      },
-    },
   },
 })

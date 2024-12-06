@@ -35,15 +35,20 @@ The Button component should be used to perform primary or secondary actions with
   </Button>
 </ComponentExample>
 
-- **Primary Buttons:** Use for the most important action on the page or within a section.
-- **Secondary Buttons:** Use for less critical actions or alternative choices.
-- **Tertiary Buttons:** Typically used for actions like "Cancel" or "Reset" that are not the main focus.
+- **Primary buttons:** Use for the most important action on the page or within a section
+- **Secondary buttons:** Use for less critical actions or alternative choices
+- **Tertiary buttons:** Typically used for actions like "Cancel" or "Reset" that are not the main focus
 
 Each variant has distinct visual styles to ensure the button's purpose is immediately apparent to the user.
 
-```jsx
+```js
+// Primary button
 <Button variant="primary">Submit</Button>
+
+// Secondary button
 <Button variant="secondary">Cancel</Button>
+
+// Tertiary button
 <Button variant="tertiary">Learn More</Button>
 ```
 
@@ -69,13 +74,14 @@ The Button component includes different states to indicate the status of an acti
   </Button>
 </ComponentExample>
 
-- **Default:** The button is in its normal state.
-- **Hover:** When the user hovers over the button.
-- **Pressed:** When the button is clicked or held down.
-- **Disabled:** When the button is not interactive.
-- **Focus:** The focus state is crucial for accessibility and navigation. When a user navigates to the button using the keyboard.
+- **Default:** The button is in its normal state
+- **Hover:** When the user hovers over the button
+- **Pressed:** When the button is clicked or held down
+- **Disabled:** When the button is not interactive
+- **Focus:** The focus state is crucial for accessibility and navigation. When a user navigates to the button using the keyboard
 
-```jsx
+```js
+// Disabled button example
 <Button variant="primary" disabled>
   Submit
 </Button>

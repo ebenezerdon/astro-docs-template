@@ -36,30 +36,25 @@ export default {
 
 2. Import our base styles in your root layout:
 
-```svelte
-<!-- src/routes/+layout.svelte -->
-<script>
-  import '@acme/design-system/styles.css'
-</script>
-
-<slot />
+```js
+// src/routes/+layout.js
+import '@acme/design-system/styles.css'
 ```
 
 ## Using components
 
-Import and use components in your Svelte files:
+Import and use components in your files:
 
-```svelte
-<script>
-  import { Button } from '@acme/design-system'
-</script>
+```js
+// Example component usage
+import { Button } from '@acme/design-system'
 
-<!-- Primary button -->
+// Primary button
 <Button variant="primary">
   Get Started
 </Button>
 
-<!-- Secondary button -->
+// Secondary button
 <Button variant="secondary">
   Learn More
 </Button>
@@ -87,6 +82,6 @@ Common issues and solutions:
 
 ## Next steps
 
-- [Explore Components](/components/button) - See all available components
-- [Read Design Guidelines](/foundations/colors) - Learn our design principles
-- [View Examples](/examples) - See real-world implementations
+- [Explore components](/components/button) - See all available components
+- [Read design guidelines](/foundations/colors) - Learn our design principles
+- [View examples](/examples) - See real-world implementations
