@@ -5,23 +5,23 @@ description: Learn how to get started with our design system.
 priority: 1
 ---
 
-Welcome to the Acme Inc. Design System. This guide will help you get up and running with our components and design tokens.
+Get up and running with our design system in your Svelte project. This guide will walk you through installation, basic usage, and best practices.
 
-## Installation
+## Quick Install
 
-1. Install the package using npm:
+Add our design system to your project:
 
 ```bash
+# Using npm
 npm install @acme/design-system
+
+# Using pnpm
+pnpm add @acme/design-system
 ```
 
-2. Add the required dependencies:
+## Basic Setup
 
-```bash
-npm install tailwindcss @sveltejs/kit
-```
-
-3. Import our Tailwind configuration:
+1. Configure Tailwind CSS in your project:
 
 ```js
 // tailwind.config.js
@@ -29,37 +29,64 @@ import acmePreset from '@acme/design-system/preset'
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  content: ['./src/**/*.{html,js,svelte,ts}'],
   presets: [acmePreset],
-  // Your custom configuration...
 }
 ```
 
-## Usage
+2. Import our base styles in your root layout:
 
-Import and use our components in your Svelte files:
+```svelte
+<!-- src/routes/+layout.svelte -->
+<script>
+  import '@acme/design-system/styles.css'
+</script>
+
+<slot />
+```
+
+## Using Components
+
+Import and use components in your Svelte files:
 
 ```svelte
 <script>
   import { Button } from '@acme/design-system'
 </script>
 
-<Button variant="primary">Click me</Button>
+<!-- Primary button -->
+<Button variant="primary">
+  Get Started
+</Button>
+
+<!-- Secondary button -->
+<Button variant="secondary">
+  Learn More
+</Button>
 ```
 
-## Development
+## Dark Mode Support
 
-To contribute to the design system:
+Our components support dark mode out of the box. Enable it in your app:
 
-1. Clone the repository
-2. Install dependencies
-3. Start the development server
-4. Make your changes
-5. Submit a pull request
+```js
+// Toggle dark mode
+document.documentElement.classList.toggle('dark')
 
-## Support
+// Check current theme
+const isDark = document.documentElement.classList.contains('dark')
+```
 
-If you need help or have questions:
+## Troubleshooting
 
-- Check our [documentation](/introduction)
-- Join our [Discord community](https://discord.gg/acme)
-- Open an [issue on GitHub](https://github.com/acme/design-system/issues)
+Common issues and solutions:
+
+- **Styles not working?** Ensure Tailwind is configured correctly and processing your files
+- **TypeScript errors?** Check you have `@sveltejs/kit` and `typescript` installed
+- **Components not found?** Verify the import path and package installation
+
+## Next Steps
+
+- [Explore Components](/components/button) - See all available components
+- [Read Design Guidelines](/foundations/colors) - Learn our design principles
+- [View Examples](/examples) - See real-world implementations
