@@ -109,13 +109,13 @@
     <input
       bind:this={searchInput}
       type="search"
-      placeholder="Search documentation..."
-      class="w-[300px] pl-10 pr-16 py-1.5 rounded-full bg-[#f0f0f1] dark:bg-gray-800 border border-transparent focus:border-[#19191C] dark:focus:border-gray-600 outline-none text-[15px] leading-[19.6px] tracking-[-0.0045em]"
+      placeholder="Search"
+      class="w-[300px] pl-10 pr-16 py-1.5 rounded-[10px] bg-white dark:bg-gray-800 border border-[#DCDCE4] dark:border-gray-700 focus:border-[#19191C] dark:focus:border-gray-600 outline-none text-[15px] leading-[19.6px] tracking-[-0.0045em]"
       on:input={handleSearch}
       on:keydown={handleKeyDown}
     />
     <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-      <kbd class="px-1.5 py-0.5 text-xs text-gray-400 bg-[#ebebec] dark:bg-gray-700 rounded-[4px] border border-gray-200 dark:border-gray-600">⌘K</kbd>
+      <kbd class="px-1.5 py-0.5 text-xs text-gray-400 bg-[#F4F4F7] dark:bg-gray-700 rounded-[4px] border border-[#DCDCE4] dark:border-gray-600">⌘K</kbd>
     </div>
   </div>
 
