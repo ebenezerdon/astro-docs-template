@@ -2,9 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles for documentation */
+/* Theme Variables */
+:root {
+  --color-text-primary: #2d2d31;
+  --color-text-secondary: #56565c;
+  --prism-background: theme('colors.white');
+  --prism-color: theme('colors.gray.800');
+}
+
+:root.dark {
+  --color-text-primary: theme('colors.white');
+  --color-text-secondary: theme('colors.gray.300');
+  --prism-background: theme('colors.gray.800');
+  --prism-color: theme('colors.gray.200');
+}
+
+/* Prose Styles */
 .prose {
-  @apply text-[#56565C] dark:text-gray-300;
+  @apply text-[color:var(--color-text-secondary)];
 }
 
 .prose h1,
@@ -13,95 +28,141 @@
 .prose h4,
 .prose h5,
 .prose h6 {
-  @apply text-[#2D2D31] dark:text-white font-semibold scroll-mt-20;
+  @apply text-[color:var(--color-text-primary)] font-semibold scroll-mt-20;
 }
 
-.prose h1 {
-  @apply text-4xl mb-8;
-}
-
-.prose h2 {
-  @apply text-2xl mt-12 mb-6;
-}
-
-.prose h3 {
-  @apply text-xl mt-8 mb-4;
-}
-
-.prose p {
-  @apply mb-6 leading-7;
-}
-
-.prose a {
-  @apply text-[#19191C] dark:text-gray-300 no-underline hover:underline;
-}
-
-.prose ul {
-  @apply mb-6 list-disc pl-6;
-}
-
-.prose ol {
-  @apply mb-6 list-decimal pl-6;
-}
-
-.prose li {
-  @apply mb-2;
-}
-
-.prose pre {
-  @apply p-4 rounded-lg bg-gray-50 dark:bg-gray-900 overflow-x-auto mb-6;
-}
-
-.prose code {
-  @apply text-sm font-mono;
-}
-
-.prose table {
-  @apply w-full mb-6;
-}
-
-.prose th {
-  @apply text-left py-2 px-4 border-b-2 border-gray-200 dark:border-gray-700 font-semibold;
-}
-
-.prose td {
-  @apply py-2 px-4 border-b border-gray-200 dark:border-gray-700;
-}
-
-.prose blockquote {
-  @apply pl-4 border-l-4 border-gray-200 dark:border-gray-700 italic my-6;
-}
-
-/* Code block syntax highlighting */
-.prose pre code {
-  @apply bg-transparent p-0 text-sm;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .prose h1 {
-    @apply text-3xl;
+.prose {
+  h1 {
+    @apply text-4xl mb-8;
+  }
+  h2 {
+    @apply text-2xl mt-12 mb-6;
+  }
+  h3 {
+    @apply text-xl mt-8 mb-4;
+  }
+  p {
+    @apply mb-6 leading-7;
   }
 
-  .prose h2 {
-    @apply text-xl;
+  a {
+    @apply text-[#19191C] dark:text-gray-300 no-underline hover:underline;
   }
 
-  .prose h3 {
-    @apply text-lg;
+  ul {
+    @apply mb-6 list-disc pl-6;
+  }
+  ol {
+    @apply mb-6 list-decimal pl-6;
+  }
+  li {
+    @apply mb-2;
+  }
+
+  table {
+    @apply w-full mb-6;
+  }
+  th {
+    @apply text-left py-2 px-4 border-b-2 border-gray-200 dark:border-gray-700 font-semibold;
+  }
+  td {
+    @apply py-2 px-4 border-b border-gray-200 dark:border-gray-700;
+  }
+
+  blockquote {
+    @apply pl-4 border-l-4 border-gray-200 dark:border-gray-700 italic my-6;
   }
 }
 
-/* Site header */
+/* Code Blocks */
+.prose {
+  pre[class*='language-'] {
+    @apply p-4 rounded-lg overflow-x-auto mb-6 border border-gray-100 dark:border-transparent;
+    background-color: var(--prism-background) !important;
+    color: var(--prism-color);
+  }
+
+  :not(pre) > code {
+    @apply bg-white dark:bg-gray-800 px-1.5 py-0.5 rounded border border-gray-100 dark:border-transparent;
+  }
+
+  code {
+    @apply text-sm font-mono;
+  }
+
+  code[class*='language-'] {
+    @apply bg-transparent p-0;
+    color: var(--prism-color);
+  }
+}
+
+/* Prism Token Styles */
+.token {
+  &.comment,
+  &.prolog,
+  &.doctype,
+  &.cdata {
+    @apply text-gray-500 dark:text-gray-400;
+  }
+
+  &.punctuation {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+
+  &.property,
+  &.tag,
+  &.boolean,
+  &.number,
+  &.constant,
+  &.symbol,
+  &.deleted {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  &.selector,
+  &.attr-name,
+  &.string,
+  &.char,
+  &.builtin,
+  &.inserted {
+    @apply text-green-600 dark:text-green-400;
+  }
+
+  &.operator,
+  &.entity,
+  &.url,
+  .language-css &.string,
+  .style &.string {
+    @apply text-yellow-600 dark:text-yellow-400;
+  }
+
+  &.atrule,
+  &.attr-value,
+  &.keyword {
+    @apply text-purple-600 dark:text-purple-400;
+  }
+
+  &.function,
+  &.class-name {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  &.regex,
+  &.important,
+  &.variable {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+}
+
+/* Layout Components */
 .site-title {
   @apply flex items-center gap-2 px-4 py-3 text-lg font-semibold;
+
+  .documentation {
+    @apply text-gray-400 font-normal;
+  }
 }
 
-.site-title .documentation {
-  @apply text-gray-400 font-normal;
-}
-
-/* Main layout */
 .content-panel {
   @apply max-w-none;
 }
@@ -110,7 +171,7 @@ main {
   @apply px-8 py-6;
 }
 
-/* Sidebar Navigation */
+/* Navigation */
 .sidebar {
   @apply h-full py-4;
 }
@@ -120,15 +181,16 @@ main {
 }
 
 .nav-item {
-  @apply block py-2 px-4 text-[15px] text-[#56565C] hover:text-[#2D2D31] no-underline transition-colors border-none;
-}
+  @apply block py-2 px-4 text-[15px] text-[color:var(--color-text-secondary)]
+         hover:text-[color:var(--color-text-primary)] no-underline transition-colors border-none;
 
-.top-level-item {
-  @apply text-[15px] font-normal;
+  &[aria-current='page'] {
+    @apply bg-[#F4F4F7] text-[color:var(--color-text-primary)] font-normal dark:bg-gray-800 dark:text-white;
+  }
 }
 
 .section-header {
-  @apply px-4 py-2 text-xs font-medium text-[#2D2D31] uppercase tracking-wider;
+  @apply px-4 py-2 text-xs font-medium text-[color:var(--color-text-primary)] uppercase tracking-wider dark:text-gray-500;
 }
 
 .nav-items {
@@ -137,27 +199,20 @@ main {
 
 /* Section dividers */
 .sidebar > div > div:not(:last-child) {
-  @apply border-b border-gray-100 mb-4 pb-4;
+  @apply border-b border-gray-100 mb-4 pb-4 dark:border-gray-800;
 }
 
-/* Current page indicator */
-.nav-item[aria-current='page'] {
-  @apply bg-[#F4F4F7] text-[#2D2D31] font-normal;
-}
-
-/* Dark mode overrides */
-:global(.dark) .nav-item {
-  @apply text-gray-400 hover:text-white;
-}
-
-:global(.dark) .section-header {
-  @apply text-gray-500;
-}
-
-:global(.dark) .nav-item[aria-current='page'] {
-  @apply bg-gray-800 text-white;
-}
-
-:global(.dark) .sidebar > div > div:not(:last-child) {
-  @apply border-gray-800;
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .prose {
+    h1 {
+      @apply text-3xl;
+    }
+    h2 {
+      @apply text-xl;
+    }
+    h3 {
+      @apply text-lg;
+    }
+  }
 }
