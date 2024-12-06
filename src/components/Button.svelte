@@ -5,9 +5,9 @@
   export let className = ''
 
   const variantClasses = {
-    primary: 'bg-black text-white hover:bg-gray-900 active:bg-gray-800',
-    secondary: 'bg-white text-black border border-[#EDEDF0] hover:bg-gray-50 active:bg-gray-100',
-    tertiary: 'bg-transparent text-black hover:bg-gray-50 active:bg-gray-100'
+    primary: 'bg-black text-white hover:bg-gray-900 active:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-100 dark:active:bg-gray-200',
+    secondary: 'bg-white text-black border border-[#EDEDF0] hover:bg-gray-50 active:bg-gray-100 dark:bg-gray-800 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:active:bg-gray-600',
+    tertiary: 'bg-transparent text-black hover:bg-gray-50 active:bg-gray-100 dark:text-white dark:hover:bg-gray-800 dark:active:bg-gray-700'
   }
 
   $: classes = `
@@ -21,9 +21,11 @@
     font-medium
     flex items-center justify-center
     transition-colors
-    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black
+    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black dark:focus:ring-white dark:focus:ring-offset-gray-900
     disabled:opacity-50 disabled:cursor-not-allowed
-    disabled:hover:bg-black disabled:active:bg-black
+    ${variant === 'primary'
+      ? 'disabled:hover:bg-black disabled:active:bg-black dark:disabled:hover:bg-white dark:disabled:active:bg-white'
+      : ''}
   `
 </script>
 
@@ -38,12 +40,12 @@
 
 <style>
   :global(.hover) {
-    @apply bg-gray-900;
+    @apply bg-gray-900 dark:bg-gray-100;
   }
   :global(.pressed) {
-    @apply bg-gray-800;
+    @apply bg-gray-800 dark:bg-gray-200;
   }
   :global(.focus) {
-    @apply ring-2 ring-offset-2 ring-black;
+    @apply ring-2 ring-offset-2 ring-black dark:ring-white dark:ring-offset-gray-900;
   }
 </style>
