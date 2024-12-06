@@ -7,7 +7,7 @@ const docs = defineCollection({
     description: z.string(),
     group: z.string().optional(),
     order: z.number().optional(),
-    // For components and foundations sections
+    priority: z.number().optional(),
     category: z.enum(['Overview', 'Foundations', 'Components']).optional(),
   }),
 })

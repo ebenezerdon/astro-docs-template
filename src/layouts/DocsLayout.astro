@@ -15,9 +15,20 @@ const { title, description } = Astro.props
 // Fetch and prepare navigation data
 const docs = await getCollection('docs')
 const sortedDocs = docs.sort((a, b) => {
+  // First, sort by priority (higher priority comes first)
+  if (a.data.priority !== undefined && b.data.priority !== undefined) {
+    return b.data.priority - a.data.priority
+  }
+  // If one has priority and the other doesn't, prioritized item comes first
+  if (a.data.priority !== undefined) return -1
+  if (b.data.priority !== undefined) return 1
+
+  // Then sort by order if specified
   if (a.data.order !== undefined && b.data.order !== undefined) {
     return a.data.order - b.data.order
   }
+
+  // Finally, sort alphabetically by title
   return a.data.title.localeCompare(b.data.title)
 })
 
