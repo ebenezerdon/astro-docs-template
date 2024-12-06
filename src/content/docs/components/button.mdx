@@ -1,80 +1,82 @@
 ---
 title: Button
+description: The Button component is a versatile UI element used for initiating actions or submitting data in your application. It is one of the most common interactive elements and is designed to be highly customizable to meet different use cases.
 group: Components
-description: A versatile UI element used for initiating actions or submitting data in your application.
 ---
 
 import Button from '../../../components/Button.svelte'
+import { ComponentExample } from '../../../components/mdx'
 
 The Button component is a versatile UI element used for initiating actions or submitting data in your application. It is one of the most common interactive elements and is designed to be highly customizable to meet different use cases.
+
+<ComponentExample type="single">
+  <Button variant="primary" client:load>
+    Button
+  </Button>
+</ComponentExample>
+
+## Overview
+
+A button typically triggers an event when clicked, such as form submissions, navigation, or interactions with other elements in the interface. Our Button component follows the principles of clarity, accessibility, and consistency.
 
 ## Usage
 
 The Button component should be used to perform primary or secondary actions within your UI. It is important to choose the correct button style depending on the importance of the action.
 
-### Button Variants
-
-<div class="flex flex-wrap gap-4 my-8">
+<ComponentExample type="variants">
   <Button variant="primary" client:load>
-    Primary Button
+    Button
   </Button>
   <Button variant="secondary" client:load>
-    Secondary Button
+    Button
   </Button>
   <Button variant="tertiary" client:load>
-    Tertiary Button
+    Button
   </Button>
-</div>
+</ComponentExample>
 
-```svelte
-<Button variant="primary">Primary Button</Button>
-<Button variant="secondary">Secondary Button</Button>
-<Button variant="tertiary">Tertiary Button</Button>
+- **Primary Buttons:** Use for the most important action on the page or within a section.
+- **Secondary Buttons:** Use for less critical actions or alternative choices.
+- **Tertiary Buttons:** Typically used for actions like "Cancel" or "Reset" that are not the main focus.
+
+Each variant has distinct visual styles to ensure the button's purpose is immediately apparent to the user.
+
+```jsx
+<Button variant="primary">Submit</Button>
+<Button variant="secondary">Cancel</Button>
+<Button variant="tertiary">Learn More</Button>
 ```
 
-### Button Sizes
+## States
 
-<div class="flex flex-wrap items-center gap-4 my-8">
-  <Button size="small" client:load>
-    Small
-  </Button>
-  <Button size="default" client:load>
+The Button component includes different states to indicate the status of an action:
+
+<ComponentExample type="states">
+  <Button variant="primary" client:load>
     Default
   </Button>
-  <Button size="large" client:load>
-    Large
+  <Button variant="primary" class="hover" client:load>
+    Hover
   </Button>
-</div>
-
-```svelte
-<Button size="small">Small</Button>
-<Button size="default">Default</Button>
-<Button size="large">Large</Button>
-```
-
-### Disabled State
-
-<div class="flex flex-wrap gap-4 my-8">
-  <Button disabled client:load>
-    Disabled Button
+  <Button variant="primary" class="pressed" client:load>
+    Pressed
   </Button>
-</div>
+  <Button variant="primary" disabled client:load>
+    Disabled
+  </Button>
+  <Button variant="primary" class="focus" client:load>
+    Focus
+  </Button>
+</ComponentExample>
 
-```svelte
-<Button disabled>Disabled Button</Button>
+- **Default:** The button is in its normal state.
+- **Hover:** When the user hovers over the button.
+- **Pressed:** When the button is clicked or held down.
+- **Disabled:** When the button is not interactive.
+- **Focus:** The focus state is crucial for accessibility and navigation. When a user navigates to the button using the keyboard.
+
+```jsx
+<Button variant="primary" disabled>
+  Submit
+</Button>
 ```
-
-## Props
-
-| Prop     | Type                                   | Default   | Description                            |
-| -------- | -------------------------------------- | --------- | -------------------------------------- |
-| variant  | 'primary' \| 'secondary' \| 'tertiary' | 'primary' | The visual style variant of the button |
-| size     | 'small' \| 'default' \| 'large'        | 'default' | The size of the button                 |
-| disabled | boolean                                | false     | Whether the button is disabled         |
-| type     | 'button' \| 'submit' \| 'reset'        | 'button'  | The HTML button type                   |
-
-## Accessibility
-
-- Buttons are focusable and can be triggered using both mouse and keyboard
-- When disabled, buttons cannot be focused and clearly show their disabled state
-- The component supports ARIA attributes through props

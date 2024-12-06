@@ -1,29 +1,29 @@
-<script>
-  export let variant = 'primary'
+<script lang="ts">
+  export let variant: 'primary' | 'secondary' | 'tertiary' = 'primary'
   export let disabled = false
   export let type = 'button'
-  export let size = 'default'
+  export let className = ''
 
   const variantClasses = {
-    primary: 'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500',
-    secondary: 'bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-gray-500 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600',
-    tertiary: 'text-gray-700 hover:bg-gray-100 focus:ring-gray-500 dark:text-gray-300 dark:hover:bg-gray-800'
-  }
-
-  const sizeClasses = {
-    small: 'px-3 py-1.5 text-sm',
-    default: 'px-4 py-2',
-    large: 'px-6 py-3 text-lg'
+    primary: 'bg-black text-white hover:bg-gray-900 active:bg-gray-800',
+    secondary: 'bg-white text-black border border-[#EDEDF0] hover:bg-gray-50 active:bg-gray-100',
+    tertiary: 'bg-transparent text-black hover:bg-gray-50 active:bg-gray-100'
   }
 
   $: classes = `
     ${variantClasses[variant]}
-    ${sizeClasses[size]}
-    inline-flex items-center justify-center
-    rounded-md font-medium
-    focus:outline-none focus:ring-2 focus:ring-offset-2
+    ${className}
+    h-[26px]
+    py-5 px-6
+    rounded-lg
+    text-[15px]
+    leading-none
+    font-medium
+    flex items-center justify-center
     transition-colors
+    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black
     disabled:opacity-50 disabled:cursor-not-allowed
+    disabled:hover:bg-black disabled:active:bg-black
   `
 </script>
 
@@ -35,3 +35,15 @@
 >
   <slot />
 </button>
+
+<style>
+  :global(.hover) {
+    @apply bg-gray-900;
+  }
+  :global(.pressed) {
+    @apply bg-gray-800;
+  }
+  :global(.focus) {
+    @apply ring-2 ring-offset-2 ring-black;
+  }
+</style>
