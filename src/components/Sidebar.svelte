@@ -33,7 +33,7 @@
   <div class="space-y-6">
     <!-- Top level items -->
     <div class="space-y-1">
-      {#each navigation.slice(0, 3) as item}
+      {#each navigation.filter(item => item.link) as item}
         {#if item.link}
           <a
             href={item.link}
@@ -49,7 +49,7 @@
     </div>
 
     <!-- Groups -->
-    {#each navigation.slice(3) as item}
+    {#each navigation.filter(item => !item.link) as item}
       {#if item.items}
         <div class="pt-6 first:border-t first:border-[#EDEDF0] first:w-[210px] first:mx-auto">
           <div class="px-4 mb-3 text-[13px] leading-[15.6px] tracking-[-0.01em] font-medium text-[#2D2D31] dark:text-white uppercase">

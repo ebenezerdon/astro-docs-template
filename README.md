@@ -13,6 +13,7 @@ A sleek and modern documentation site template built with Astro, Svelte, and Tai
 - 📱 **Responsive Design** - Mobile-first, adaptive layout
 - 🧩 **Auto-generated Navigation** - Sidebar structure from content
 - 🎯 **Priority-based Ordering** - Fine-grained control over navigation order
+- 📚 **Group Ordering** - Define navigation group order in config
 
 ## Quick Start
 
@@ -51,7 +52,9 @@ npm run dev
 
 ## Adding Content
 
-1. Add your documentation content in MDX format under `src/content/docs/`:
+### Content Files
+
+Add your documentation content in MDX format under `src/content/docs/`:
 
 ```md
 ---
@@ -66,33 +69,52 @@ priority: 2
 Welcome to our documentation...
 ```
 
-The sidebar navigation is automatically generated from your content structure. Each MDX file can include these frontmatter fields:
+### Navigation Structure
 
-| Field         | Type   | Required | Description                                       |
-| ------------- | ------ | -------- | ------------------------------------------------- |
-| `title`       | string | Yes      | Page title                                        |
-| `description` | string | Yes      | Page description                                  |
-| `group`       | string | No       | Navigation group (e.g., "Overview", "Components") |
-| `priority`    | number | No       | Navigation order priority (higher = earlier)      |
-| `order`       | number | No       | Fallback ordering within groups                   |
-| `category`    | enum   | No       | Content category                                  |
+The sidebar navigation is automatically generated from your content structure. The order of navigation groups is defined in `src/content/config.ts`:
+
+```typescript
+// Define groups in desired order
+const groups = ['Overview', 'Foundations', 'Components'] as const
+
+const docs = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    group: z.enum(groups).optional(), // Groups will appear in the order defined above
+    order: z.number().optional(),
+    priority: z.number().optional(),
+  }),
+})
+```
+
+Each MDX file can include these frontmatter fields:
+
+| Field         | Type   | Required | Description                                    |
+| ------------- | ------ | -------- | ---------------------------------------------- |
+| `title`       | string | Yes      | Page title                                     |
+| `description` | string | Yes      | Page description                               |
+| `group`       | enum   | No       | Navigation group (must match config.ts groups) |
+| `priority`    | number | No       | Navigation order priority (higher = earlier)   |
+| `order`       | number | No       | Fallback ordering within groups                |
 
 ### Navigation Priority
 
-The `priority` field gives you fine-grained control over your navigation order:
+The `priority` field gives you fine-grained control over page order within groups:
 
 ```md
 ---
 title: Home
 group: Overview
-priority: 3
+priority: 1 # Appears first
 ---
 
 ---
 
 title: Getting Started
 group: Overview
-priority: 2
+priority: 2 # Appears second
 
 ---
 
@@ -100,7 +122,7 @@ priority: 2
 
 title: Design Tokens
 group: Overview
-priority: 1
+priority: 3 # Appears third
 
 ---
 ```
@@ -109,6 +131,14 @@ If `priority` is not set, items are sorted by:
 
 1. `order` (if specified)
 2. Alphabetically by title (as fallback)
+
+### Group Order
+
+Groups appear in the order they're defined in `config.ts`. To change the order of navigation groups:
+
+1. Update the `groups` array in `src/content/config.ts`
+2. The sidebar will automatically reflect the new order
+3. TypeScript ensures group names in MDX files match the config
 
 ## Customization
 

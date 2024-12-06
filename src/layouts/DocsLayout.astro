@@ -2,7 +2,8 @@
 import Header from '@components/Header.svelte'
 import Sidebar from '@components/Sidebar.svelte'
 import TableOfContents from '@components/TableOfContents.svelte'
-import { getCollection } from 'astro:content'
+import { getCollection, type CollectionEntry } from 'astro:content'
+import { groups } from '../content/config'
 import '../styles/custom.css'
 
 interface Props {
@@ -17,7 +18,7 @@ const docs = await getCollection('docs')
 const sortedDocs = docs.sort((a, b) => {
   // First, sort by priority (higher priority comes first)
   if (a.data.priority !== undefined && b.data.priority !== undefined) {
-    return b.data.priority - a.data.priority
+    return a.data.priority - b.data.priority
   }
   // If one has priority and the other doesn't, prioritized item comes first
   if (a.data.priority !== undefined) return -1
@@ -33,12 +34,15 @@ const sortedDocs = docs.sort((a, b) => {
 })
 
 // Group docs by their group
-const groups = sortedDocs.reduce((acc, doc) => {
+const docGroups = sortedDocs.reduce((acc, doc) => {
   const group = doc.data.group || 'Ungrouped'
   if (!acc[group]) acc[group] = []
   acc[group].push(doc)
   return acc
-}, {} as Record<string, typeof docs>)
+}, {} as Record<string, CollectionEntry<'docs'>[]>)
+
+// Get ordered groups (excluding Overview which is handled separately)
+const orderedGroups = Array.from(groups).filter(group => group !== 'Overview')
 
 // Create navigation structure
 const navigation = [
@@ -48,16 +52,29 @@ const navigation = [
     link: '/',
   },
   // Then Overview items
-  ...(groups['Overview'] || []).map(doc => ({
+  ...(docGroups['Overview'] || []).map((doc: CollectionEntry<'docs'>) => ({
     label: doc.data.title,
     link: `/${doc.slug === 'index' ? '' : doc.slug}`,
   })),
-  // Then grouped items
-  ...Object.entries(groups)
-    .filter(([group]) => !['Overview', 'Ungrouped'].includes(group))
+  // Then grouped items in defined order from config
+  ...orderedGroups.map(group => {
+    if (!docGroups[group]) return null
+    return {
+      label: group.toUpperCase(),
+      items: docGroups[group].map((doc: CollectionEntry<'docs'>) => ({
+        label: doc.data.title,
+        link: `/${doc.slug}`,
+      })),
+    }
+  }).filter(Boolean),
+  // Then any remaining groups
+  ...Object.entries(docGroups)
+    .filter(([group]) =>
+      ![...groups, 'Ungrouped'].includes(group)
+    )
     .map(([group, items]) => ({
       label: group.toUpperCase(),
-      items: items.map(doc => ({
+      items: items.map((doc: CollectionEntry<'docs'>) => ({
         label: doc.data.title,
         link: `/${doc.slug}`,
       })),
