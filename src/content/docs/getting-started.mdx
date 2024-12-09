@@ -1,87 +1,143 @@
 ---
-title: Getting Started
+title: Getting started
 group: Overview
-description: Learn how to get started with our design system.
-priority: 1
+description: Learn how to set up and start using the documentation template.
 ---
 
-Get up and running with our design system in your Svelte project. This guide will walk you through installation, basic usage, and best practices.
-
-## Quick install
-
-Add our design system to your project:
+## Quick start
 
 ```bash
-# Using npm
-npm install @acme/design-system
+# Clone the repository
+git clone https://github.com/ebenezerdon/docs-template.git
 
-# Using pnpm
-pnpm add @acme/design-system
+# Navigate to the project
+cd docs-template
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-## Basic setup
+## Project structure
 
-1. Configure Tailwind CSS in your project:
-
-```js
-// tailwind.config.js
-import acmePreset from '@acme/design-system/preset'
-
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
-  presets: [acmePreset],
-}
+```
+.
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── content/
+│   │   ├── docs/
+│   │   └── config.ts
+│   ├── layouts/
+│   ├── pages/
+│   └── styles/
+├── astro.config.mjs
+├── package.json
+└── tsconfig.json
 ```
 
-2. Import our base styles in your root layout:
+## Adding content
 
-```js
-// src/routes/+layout.js
-import '@acme/design-system/styles.css'
+### Content files
+
+Add your documentation content in MDX format under `src/content/docs/`:
+
+```md
+---
+title: Getting started
+description: Learn how to use our product
+group: Overview
+priority: 2
+---
+
+# Getting started
+
+Welcome to our documentation...
 ```
 
-## Using components
+### Navigation structure
 
-Import and use components in your files:
+The sidebar navigation is automatically generated from your content structure. The order of navigation groups is defined in `src/content/config.ts`:
 
-```js
-// Example component usage
-import { Button } from '@acme/design-system'
+```typescript
+// Define groups in desired order
+const groups = ['Overview', 'Foundations', 'Components'] as const
 
-// Primary button
-<Button variant="primary">
-  Get Started
-</Button>
-
-// Secondary button
-<Button variant="secondary">
-  Learn More
-</Button>
+const docs = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    group: z.enum(groups).optional(), // Groups will appear in the order defined above
+    order: z.number().optional(),
+    priority: z.number().optional(),
+  }),
+})
 ```
 
-## Dark mode support
+Each MDX file can include these frontmatter fields:
 
-Our components support dark mode out of the box. Enable it in your app:
+| Field         | Type   | Required | Description                                    |
+| ------------- | ------ | -------- | ---------------------------------------------- |
+| `title`       | string | Yes      | Page title                                     |
+| `description` | string | Yes      | Page description                               |
+| `group`       | enum   | No       | Navigation group (must match config.ts groups) |
+| `priority`    | number | No       | Navigation order priority (higher = earlier)   |
+| `order`       | number | No       | Fallback ordering within groups                |
 
-```js
-// Toggle dark mode
-document.documentElement.classList.toggle('dark')
+### Navigation priority
 
-// Check current theme
-const isDark = document.documentElement.classList.contains('dark')
+The `priority` field gives you fine-grained control over page order within groups:
+
+```md
+---
+title: Home
+group: Overview
+priority: 1 # Appears first
+---
+
+---
+
+title: Getting started
+group: Overview
+priority: 2 # Appears second
+
+---
+
+---
+
+title: Design tokens
+group: Overview
+priority: 3 # Appears third
+
+---
 ```
 
-## Troubleshooting
+If `priority` is not set, items are sorted by:
 
-Common issues and solutions:
+1. `order` (if specified)
+2. Alphabetically by title (as fallback)
 
-- **Styles not working?** Ensure Tailwind is configured correctly and processing your files
-- **TypeScript errors?** Check you have `@sveltejs/kit` and `typescript` installed
-- **Components not found?** Verify the import path and package installation
+### Group order
 
-## Next steps
+Groups appear in the order they're defined in `config.ts`. To change the order of navigation groups:
 
-- [Explore components](/components/button) - See all available components
-- [Read design guidelines](/foundations/colors) - Learn our design principles
-- [View examples](/examples) - See real-world implementations
+1. Update the `groups` array in `src/content/config.ts`
+2. The sidebar will automatically reflect the new order
+3. TypeScript ensures group names in MDX files match the config
+
+## Development commands
+
+```bash
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
