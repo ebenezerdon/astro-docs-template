@@ -97,7 +97,6 @@ Each MDX file can include these frontmatter fields:
 | `description` | string | Yes      | Page description                               |
 | `group`       | enum   | No       | Navigation group (must match config.ts groups) |
 | `priority`    | number | No       | Navigation order priority (higher = earlier)   |
-| `order`       | number | No       | Fallback ordering within groups                |
 
 ### Navigation Priority
 
@@ -127,10 +126,7 @@ priority: 3 # Appears third
 ---
 ```
 
-If `priority` is not set, items are sorted by:
-
-1. `order` (if specified)
-2. Alphabetically by title (as fallback)
+If `priority` is not set, items are sorted alphabetically by title.
 
 ### Group Order
 
