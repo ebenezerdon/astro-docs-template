@@ -6,30 +6,40 @@ description: Welcome to the Acme Inc. Design System documentation.
 
 import { Card, CardGrid } from '@components/mdx'
 
-Build beautiful, consistent interfaces with our design system. We've crafted a set of components and guidelines that help you create exceptional user experiences quickly and efficiently.
+<div class="hero">
+  <div class="hero-content">
+    <h1 class="text-4xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 mb-4">
+      Build Beautiful Interfaces
+    </h1>
+    <p class="text-xl text-[#666687] dark:text-gray-400 max-w-2xl">
+      Create exceptional user experiences with our modern, accessible, and
+      customizable design system.
+    </p>
+  </div>
+</div>
 
-## Quick start
+## Get Started Quickly
 
 <CardGrid>
-  <Card title="Components" icon="puzzle">
-    Ready-to-use UI components that work together seamlessly. Start with basic
-    elements like buttons and inputs, then move to complex patterns.
+  <Card title="Components" icon="blocks" gradient="blue">
+    Explore our extensive library of ready-to-use UI components. From basic
+    elements to complex patterns, everything works seamlessly together.
   </Card>
-  <Card title="Styling" icon="palette">
-    Consistent design tokens, theming support, and Tailwind CSS integration.
-    Everything stays on-brand while maintaining flexibility.
+  <Card title="Styling & Themes" icon="brush" gradient="purple">
+    Leverage our design tokens, theming system, and Tailwind CSS integration.
+    Keep your brand consistent while maintaining flexibility.
   </Card>
-  <Card title="Patterns" icon="book">
-    Common UI patterns and best practices. Learn how to combine components to
-    create intuitive user flows.
+  <Card title="Best Practices" icon="lightbulb" gradient="orange">
+    Learn proven UI patterns and implementation strategies. Build intuitive
+    interfaces following our comprehensive guidelines.
   </Card>
-  <Card title="Examples" icon="download">
-    Real-world examples and code snippets. Copy, paste, and customize to speed
-    up your development.
+  <Card title="Code Examples" icon="sparkles" gradient="green">
+    Speed up development with real-world examples and code snippets. Copy,
+    paste, and customize to your needs.
   </Card>
 </CardGrid>
 
-## Why use our design system?
+## Why Choose Our Design System?
 
 - **Productivity**: Build UIs faster with pre-built, tested components
 - **Consistency**: Maintain visual harmony across your applications
@@ -37,10 +47,63 @@ Build beautiful, consistent interfaces with our design system. We've crafted a s
 - **Flexibility**: Easily customize and extend to match your needs
 - **Dark Mode**: Built-in dark theme support for modern applications
 
-## Start building
+## Ready to Start?
 
-Choose your path to get started:
+<div class="cta-grid">
+  <a href="/components/button" class="cta-card primary">
+    <h3>Browse Components →</h3>
+    <p>Explore our extensive component library</p>
+  </a>
+  <a href="/getting-started" class="cta-card secondary">
+    <h3>Read the Guide →</h3>
+    <p>Learn how to set up and use the system</p>
+  </a>
+  <a href="/components/accordion" class="cta-card secondary">
+    <h3>View Examples →</h3>
+    <p>See real-world implementation examples</p>
+  </a>
+</div>
 
-- [Browse components](/components/button) - Explore our component library
-- [Read the guide](/getting-started) - Set up the design system in your project
-- [View examples](/examples) - See real-world usage examples
+<style>
+  {`
+.hero {
+  @apply -mx-4 sm:-mx-8 -mt-6 mb-12 py-12 px-4 sm:px-8 bg-gradient-to-br from-purple-500/5 to-pink-500/5 dark:from-purple-500/10 dark:to-pink-500/10 border-b border-[#DCDCE4] dark:border-gray-800;
+}
+
+.hero-content {
+  @apply max-w-4xl mx-auto text-center;
+}
+
+.cta-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-8;
+}
+
+.cta-card {
+  @apply block p-6 rounded-lg border border-[#DCDCE4] dark:border-gray-800 transition-all duration-300 hover:scale-[1.02] no-underline;
+}
+
+.cta-card.primary {
+  @apply bg-gradient-to-br from-purple-500 to-pink-500 border-0;
+}
+
+.cta-card.primary h3 {
+  @apply text-white font-medium mb-1;
+}
+
+.cta-card.primary p {
+  @apply text-white/90 text-sm;
+}
+
+.cta-card.secondary {
+  @apply bg-white dark:bg-gray-900/50;
+}
+
+.cta-card.secondary h3 {
+  @apply text-[#19191C] dark:text-white font-medium mb-1;
+}
+
+.cta-card.secondary p {
+  @apply text-[#666687] dark:text-gray-400 text-sm;
+}
+`}
+</style>
