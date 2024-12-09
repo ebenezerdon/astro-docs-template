@@ -28,7 +28,7 @@
 .prose h4,
 .prose h5,
 .prose h6 {
-  @apply text-[color:var(--color-text-primary)] font-semibold scroll-mt-20;
+  @apply text-[color:var(--color-text-primary)] font-medium scroll-mt-20;
 }
 
 .prose {
@@ -63,7 +63,7 @@
     @apply w-full mb-6;
   }
   th {
-    @apply text-left py-2 px-4 border-b-2 border-gray-200 dark:border-gray-700 font-semibold;
+    @apply text-left py-2 px-4 border-b-2 border-gray-200 dark:border-gray-700 font-medium;
   }
   td {
     @apply py-2 px-4 border-b border-gray-200 dark:border-gray-700;
