@@ -30,7 +30,7 @@
   }
 </script>
 
-<nav class="h-full overflow-y-auto py-6 px-4">
+<nav class="h-full overflow-y-auto py-2 px-4">
   <div class="space-y-6">
     <!-- Mobile Search -->
     <div class="lg:hidden mb-4">
