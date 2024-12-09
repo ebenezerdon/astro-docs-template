@@ -1,5 +1,6 @@
 <script lang="ts">
   import { layoutStore } from '../stores/layout'
+  import Search from './Search.svelte'
 
   interface NavItem {
     label: string
@@ -31,6 +32,11 @@
 
 <nav class="h-full overflow-y-auto py-6 px-4">
   <div class="space-y-6">
+    <!-- Mobile Search -->
+    <div class="lg:hidden mb-4">
+      <Search />
+    </div>
+
     <!-- Top level items -->
     <div class="space-y-1">
       {#each navigation.filter(item => item.link) as item}

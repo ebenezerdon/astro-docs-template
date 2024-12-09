@@ -101,7 +101,7 @@
   }
 </script>
 
-<div class="relative">
+<div class="relative w-full sm:w-auto">
   <div class="relative">
     <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
       <SearchIcon class="h-5 w-5 text-gray-400" />
@@ -110,12 +110,12 @@
       bind:this={searchInput}
       type="search"
       placeholder="Search"
-      class="w-[300px] pl-10 pr-16 py-1.5 rounded-[10px] bg-white dark:bg-gray-800 border border-[#DCDCE4] dark:border-gray-700 focus:border-[#19191C] dark:focus:border-gray-600 outline-none text-[15px] leading-[19.6px] tracking-[-0.0045em]"
+      class="w-full sm:w-[300px] pl-10 pr-16 py-1.5 rounded-[10px] bg-white dark:bg-gray-800 border border-[#DCDCE4] dark:border-gray-700 focus:border-[#19191C] dark:focus:border-gray-600 outline-none text-[15px] leading-[19.6px] tracking-[-0.0045em]"
       on:input={handleSearch}
       on:keydown={handleKeyDown}
     />
     <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-      <kbd class="px-1.5 py-0.5 text-xs text-gray-400 bg-[#F4F4F7] dark:bg-gray-700 rounded-[4px] border border-[#DCDCE4] dark:border-gray-600">⌘K</kbd>
+      <kbd class="hidden sm:block px-1.5 py-0.5 text-xs text-gray-400 bg-[#F4F4F7] dark:bg-gray-700 rounded-[4px] border border-[#DCDCE4] dark:border-gray-600">⌘K</kbd>
     </div>
   </div>
 
