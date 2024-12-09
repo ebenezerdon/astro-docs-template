@@ -1,7 +1,7 @@
 ---
-title: Build beautiful interfaces
+title: Modern documentation template
 group: Overview
-description: Welcome to the Acme Inc. Design System documentation.
+description: A sleek and modern documentation site template built with Astro, Svelte, and Tailwind CSS.
 ---
 
 import { Card, CardGrid } from '@components/mdx'
@@ -9,8 +9,9 @@ import { Card, CardGrid } from '@components/mdx'
 <div class="hero">
   <div class="hero-content">
     <p class="text-xl text-[#666687] dark:text-gray-400 max-w-2xl">
-      Create exceptional user experiences with our modern, accessible, and
-      customizable design system.
+      A sleek and modern documentation site template built with Astro, Svelte,
+      and Tailwind CSS. Features a clean design, full-text search, dark mode
+      support, and responsive layout.
     </p>
   </div>
 </div>
@@ -18,46 +19,50 @@ import { Card, CardGrid } from '@components/mdx'
 ## Get started
 
 <CardGrid>
-  <Card title="Components" icon="blocks" gradient="blue">
-    Explore our extensive library of ready-to-use UI components. From basic
-    elements to complex patterns, everything works seamlessly together.
+  <Card title="Quick start" icon="download" gradient="blue">
+    Clone the repository, install dependencies, and start the development
+    server. Get up and running in minutes with our streamlined setup process.
   </Card>
-  <Card title="Styling & Themes" icon="brush" gradient="purple">
-    Leverage our design tokens, theming system, and Tailwind CSS integration.
-    Keep your brand consistent while maintaining flexibility.
+  <Card title="Project structure" icon="blocks" gradient="purple">
+    Well-organized project structure with dedicated directories for content,
+    components, layouts, and styles. Everything has its place.
   </Card>
-  <Card title="Best Practices" icon="lightbulb" gradient="orange">
-    Learn proven UI patterns and implementation strategies. Build intuitive
-    interfaces following our comprehensive guidelines.
+  <Card title="Adding content" icon="sparkles" gradient="orange">
+    Write your documentation in MDX format with full component support. Organize
+    content with groups and priority-based ordering.
   </Card>
-  <Card title="Code Examples" icon="sparkles" gradient="green">
-    Speed up development with real-world examples and code snippets. Copy,
-    paste, and customize to your needs.
+  <Card title="Customization" icon="brush" gradient="green">
+    Easily customize colors, typography, and components. Built with Tailwind CSS
+    for flexible styling and Svelte for interactive components.
   </Card>
 </CardGrid>
 
-## Why choose our design system?
+## Key features
 
-- **Productivity**: Build UIs faster with pre-built, tested components
-- **Consistency**: Maintain visual harmony across your applications
-- **Accessibility**: WCAG 2.1 compliant components out of the box
-- **Flexibility**: Easily customize and extend to match your needs
-- **Dark Mode**: Built-in dark theme support for modern applications
+- **Built with Astro**: Fast, modern static site generation
+- **Svelte components**: Interactive UI components with great DX
+- **Tailwind CSS**: Utility-first CSS framework
+- **MDX support**: Write content in MDX with component support
+- **Full-text search**: Fast client-side search with Fuse.js
+- **Dark mode**: Elegant light and dark theme support
+- **Responsive design**: Mobile-first, adaptive layout
+- **Auto-generated navigation**: Sidebar structure from content
+- **Priority-based ordering**: Fine-grained control over navigation order
 
 ## Ready to start?
 
 <div class="cta-grid">
-  <a href="/components/button" class="cta-card primary">
-    <h3>Browse Components →</h3>
-    <p>Explore our extensive component library</p>
+  <a href="/getting-started" class="cta-card primary">
+    <h3>Quick start guide →</h3>
+    <p>Get your documentation site running in minutes</p>
   </a>
-  <a href="/getting-started" class="cta-card secondary">
-    <h3>Read the Guide →</h3>
-    <p>Learn how to set up and use the system</p>
+  <a href="/content" class="cta-card secondary">
+    <h3>Adding content →</h3>
+    <p>Learn how to structure and write your docs</p>
   </a>
-  <a href="/components/accordion" class="cta-card secondary">
-    <h3>View Examples →</h3>
-    <p>See real-world implementation examples</p>
+  <a href="/customization" class="cta-card secondary">
+    <h3>Customization →</h3>
+    <p>Make it your own with theming and components</p>
   </a>
 </div>
 
