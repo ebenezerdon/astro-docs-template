@@ -2,6 +2,7 @@
 import Header from '@components/Header.svelte'
 import Sidebar from '@components/Sidebar.svelte'
 import TableOfContents from '@components/TableOfContents.svelte'
+import SidebarOverlay from '@components/SidebarOverlay.svelte'
 import { getCollection, type CollectionEntry } from 'astro:content'
 import { groups } from '../content/config'
 import '../styles/custom.css'
@@ -116,6 +117,7 @@ const navigation = [
   </head>
   <body class="min-h-screen bg-[#FAFAFB] dark:bg-gray-900">
     <Header client:load />
+    <SidebarOverlay client:load />
 
     <div class="flex h-[calc(100vh-3.5rem)] mt-14">
       <!-- Left Sidebar -->
