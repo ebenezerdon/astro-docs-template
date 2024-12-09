@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { Sun, Moon, Menu } from 'lucide-svelte'
+  import { Sun, Moon, Menu, Github } from 'lucide-svelte'
   import Search from './Search.svelte'
   import { layoutStore } from '../stores/layout'
 
@@ -56,6 +56,16 @@
       <div class="hidden sm:block">
         <Search />
       </div>
+
+      <a
+        href="https://github.com/ebenezerdon/docs-template"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+        aria-label="View on GitHub"
+      >
+        <Github class="h-5 w-5 text-gray-600 dark:text-gray-400" />
+      </a>
 
       <button
         on:click={toggleTheme}
